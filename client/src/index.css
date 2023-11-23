@@ -77,6 +77,8 @@
     --color-ascent2: 89 91 100;
     --color-blue: 6 90 216;
     --color-white: 255 255 255;
+    --color-success: 92, 184, 92;
+    --color-failure: 217, 83, 79;
   }
   /* //15 23 42  21 30 49*/
   [data-theme="dark"] {
@@ -88,5 +90,7 @@
     --color-blue: 6 90 216;
     /* //16 176 255; */
     --color-white: 255 255 255;
+    --color-success: 92, 184, 92;
+    --color-failure: 217, 83, 79;
   }
 }
