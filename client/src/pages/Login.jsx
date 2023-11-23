@@ -1,21 +1,52 @@
 import React from "react";
 import { TbSocial } from "react-icons/tb";
 import { TextInput, CustomButton } from "../components";
-import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { BgImg } from "../assets";
+import { BsShare } from "react-icons/bs";
+import { ImConnection } from "react-icons/im";
+import { AiOutlineInteraction } from "react-icons/ai";
+import { BiShow } from "react-icons/bi";
+import { AiFillEyeInvisible } from "react-icons/ai";
+
+const initialState = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
 
 const Login = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({ mode: "onChange" });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+
+    if (isSignup) {
+      //Do signup
+    } else {
+      //Do login
+    }
+  };
   const [errMsg, setErrMsg] = useState("");
+  const [formData, setFormData] = useState(initialState);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const dispatch = useDispatch();
+  const [isSignup, setIsSignup] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
+  const switchMode = () => {
+    setIsSignup((prevIsSignup) => !prevIsSignup);
+    setShowPassword(false);
+  };
+
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   return (
     <div className="bg-bgColor w-full h-[100vh] flex items-center justify-center p-6">
@@ -30,51 +61,110 @@ const Login = () => {
               FriendsConnect
             </span>
           </div>
-          <p className="text-ascent-1 text-base font-semibold">
-            Log in to your account
-          </p>
-          <span className="text-sm mt-2 text-ascent-2">Welcome back</span>
-          <form className="py-8 flex flex-col gap-5">
-            {" "}
+          {isSignup ? null : (
+            <>
+              <p className="text-ascent-1 text-base font-semibold">
+                Log in to your account
+              </p>
+              <span className="text-sm mt-2 text-ascent-2">Welcome back</span>
+            </>
+          )}
+
+          <form className="py-8 flex flex-col gap-0.5" onSubmit={handleSubmit}>
+            {isSignup && (
+              <>
+                <TextInput
+                  name="firstName"
+                  label="First Name"
+                  placeholder="first name"
+                  type="first name"
+                  onChange={handleChange}
+                  styles="w-full rounded-full"
+                  labelStyle="ml-2"
+                  required="field is required"
+                />
+                <TextInput
+                  name="lastName"
+                  label="Last Name"
+                  placeholder="last name"
+                  type="last name"
+                  onChange={handleChange}
+                  styles="w-full rounded-full"
+                  labelStyle="ml-2"
+                  required="field is required"
+                />
+              </>
+            )}
             <TextInput
               name="email"
               label="Email Address"
               placeholder="email@example.com"
               type="email"
-              register={register("email", {
-                required: "Email Address is required!",
-              })}
+              onChange={handleChange}
               styles="w-full rounded-full"
               labelStyle="ml-2"
-              error={errors.email ? errors.email.message : ""}
+              required="field is required"
             />
-            <TextInput
-              name="password"
-              label="Password"
-              placeholder="Password"
-              type="password"
-              styles="w-full rounded-full"
-              labelStyle="ml-2"
-              register={register("password", {
-                required: "Password is required!",
-              })}
-              error={errors.password ? errors.password?.message : ""}
-            />
+            <div className="item-center relative">
+              {showPassword ? (
+                <AiFillEyeInvisible
+                  className="absolute right-3 bottom-4 ml-3 mt-3 h-5 w-5"
+                  color="gray"
+                  onClick={handleShowPassword}
+                />
+              ) : (
+                <BiShow
+                  className=" absolute right-3 bottom-4 ml-3 mt-3 h-5 w-5"
+                  color="gray"
+                  onClick={handleShowPassword}
+                />
+              )}
+              <TextInput
+                name="password"
+                label="Password"
+                placeholder="••••••••"
+                type={showPassword ? "text" : "password"}
+                styles="w-full rounded-full"
+                labelStyle="ml-2"
+                onChange={handleChange}
+                required="field is required"
+              />
+            </div>
+
+            {isSignup ? (
+              <div className="item-center relative">
+                {showPassword ? (
+                  <AiFillEyeInvisible
+                    className="absolute right-3 bottom-4 ml-3 mt-3 h-5 w-5"
+                    color="gray"
+                    onClick={handleShowPassword}
+                  />
+                ) : (
+                  <BiShow
+                    className=" absolute right-3 bottom-4 ml-3 mt-3 h-5 w-5"
+                    color="gray"
+                    onClick={handleShowPassword}
+                  />
+                )}
+                <TextInput
+                  name="confirmPassword"
+                  label="Confirm Password"
+                  placeholder="••••••••"
+                  type={showPassword ? "text" : "password"}
+                  styles="w-full rounded-full"
+                  labelStyle="ml-2"
+                  onChange={handleChange}
+                  required="field is required"
+                />
+              </div>
+            ) : null}
             <Link
               to="/reset-password"
               className="text-sm text-right text-blue font-semibold"
             >
               Forgot Password ?
             </Link>
-            {errMsg?.message && (
-              <span
-                className={`text-sm ${
-                  errMsg?.status === "failed" ? "text-failure" : "text-success"
-                } mt-0.5`}
-              >
-                {errMsg?.message}
-              </span>
-            )}
+
             {isSubmitting ? (
               ""
             ) : (
@@ -84,16 +174,28 @@ const Login = () => {
                 title="Login"
               />
             )}
+            {isSignup ? (
+              <div className="text-ascent-2 text-sm text-center">
+                Already have an account?{" "}
+                <div
+                  className="text-ascent-2 font-medium hover:underline"
+                  onClick={switchMode}
+                >
+                  Sign in
+                </div>
+              </div>
+            ) : (
+              <div className="text-ascent-2 text-sm text-center">
+                Don’t have an account yet?{" "}
+                <div
+                  className="text-ascent-2 font-medium hover:underline"
+                  onClick={switchMode}
+                >
+                  Sign up
+                </div>
+              </div>
+            )}
           </form>
-          <p className="text-ascent-2 text-sm text-center">
-            Don't have an account
-          </p>
-          <Link
-            to="/register"
-            className="text-sm text-center text-blue font-semibold"
-          >
-            Sign up
-          </Link>
         </div>
         {/* Right */}
         <div className="hidden w-1/2 full lg:flex flex-col items-center justify-center bg-blue">
@@ -103,6 +205,26 @@ const Login = () => {
               alt="bg"
               className="w-48 2xl:w-64 h-48 2xl:h-64 rounded-full object-cover"
             />
+            <div className="absolute flex items-center gap-1 bg-white right-10 top-10 py-2 px-5 rounded-full">
+              <BsShare size={14} />
+              <span className="text-xs font-medium">Share</span>
+            </div>
+            <div className="absolute flex items-center gap-1 bg-white left-10 top-6 py-2 px-5 rounded-full">
+              <ImConnection />
+              <span className="text-xs font-medium">Connect</span>
+            </div>
+            <div className="absolute flex items-center gap-1 bg-white left-12 bottom-6 py-2 px-5 rounded-full">
+              <AiOutlineInteraction />
+              <span className="text-xs font-medium">Interact</span>
+            </div>
+          </div>
+          <div className="mt-16 text-center">
+            <p className="text-white text-base">
+              Connect with friends & have share for fun
+            </p>
+            <span className="text-sm text-white/80">
+              Share memories with friends and the world.
+            </span>
           </div>
         </div>
       </div>

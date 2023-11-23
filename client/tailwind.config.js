@@ -12,6 +12,8 @@ module.exports = {
         1: "rgb(var(--color-ascent1) / <alpha-value>)",
         2: "rgb(var(--color-ascent2) / <alpha-value>)",
       },
+      failure: "rgb(var(--color-failure) / <alpha-value>)",
+      success: "rgb(var(--color-success) / <alpha-value>)",
     },
     screens: {
       sm: "640px",
