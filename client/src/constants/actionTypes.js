@@ -8,6 +8,7 @@ export const COMMENT = "COMMENT";
 
 export const AUTH = "AUTH";
 export const LOGOUT = "LOGOUT";
+export const UPDATEPROFILE = "UPDATEPROFILE";
 export const FETCH_BY_SEARCH = "FETCH_BY_SEARCH";
 
 export const START_LOADING = "START_LOADING";

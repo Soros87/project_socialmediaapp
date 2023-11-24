@@ -72,6 +72,7 @@ export const user = {
   profileUrl:
     "https://res.cloudinary.com/djs3wu5bg/image/upload/v1683874454/samples/people/boy-snow-hoodie.jpg",
   token: "hZWFmZmU3NmMiLCJpYXQiOjE2OTIwMzY5",
+  profession: "Full-Stack Developer",
 };
 
 export const friends = [
