@@ -7,10 +7,11 @@ import { CustomButton, TextInput } from "../components";
 import { useState } from "react";
 import { LOGOUT, THEME } from "../constants/actionTypes";
 import { useNavigate } from "react-router-dom";
+
 import { IoMdNotificationsOutline } from "react-icons/io";
 
 const TopBar = () => {
-  const { user } = useSelector((state) => state.user);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const { theme } = useSelector((state) => state.theme);
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
@@ -24,9 +25,9 @@ const TopBar = () => {
 
   const logout = () => {
     dispatch({ type: LOGOUT });
-    navigateTo("/");
+    navigateTo("/login");
     window.location.reload();
-    //setUser to null
+    setUser(null);
   };
 
   const handleSearch = (e) => {};
@@ -47,15 +48,15 @@ const TopBar = () => {
         <div className="relative flex">
           <TextInput
             placeholder="Search..."
-            styles="w-[18rem] lg:w-[38rem]  rounded-l-full py-3 "
+            styles="w-[18rem] lg:w-[38rem]  rounded-full py-3 "
             onChange={(e) => setSearch(e.target.value)}
           />
           <button
             onClick={handleSearch}
-            className="absolute right-1 top-3 bottom-1 text-[#66666690] rounded-lg border p-2 text-sm"
+            className="absolute right-4 top-3 bottom-1 text-[#66666690] rounded-lg p-2 text-s hover:bg-[#f4efef90]"
           >
             <svg
-              className="h-4 w-4 text-[#66666690]"
+              className="w-4 h-4"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -75,7 +76,7 @@ const TopBar = () => {
       </form>
       {/* ICONS */}
       <div className="flex gap-4 items-center text-ascent-1 text-md md:text-xl">
-        <button onClick={() => handleTheme()}>
+        <button onClick={handleTheme}>
           {theme ? <BsMoon /> : <BsSunFill />}
         </button>
         <div className="hidden lg:flex">
