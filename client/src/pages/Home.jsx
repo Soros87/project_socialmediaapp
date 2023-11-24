@@ -1,6 +1,12 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { TopBar, Loading, CustomButton, ProfileCard } from "../components";
+import {
+  TopBar,
+  Loading,
+  CustomButton,
+  ProfileCard,
+  FriendsCard,
+} from "../components";
 
 const Home = () => {
   const { user } = useSelector((state) => state.user);
@@ -12,6 +18,7 @@ const Home = () => {
         {/* Left Side */}
         <div className="hidden w-1/3 lg:w-1/4 h-full md:flex flex-col gap-6 overflow-y-auto">
           <ProfileCard user={user} />
+          <FriendsCard friends={user?.friends} />
         </div>
         {/* Center */}
         <div></div>
