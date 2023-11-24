@@ -30,7 +30,6 @@ const Login = () => {
       //Do login
     }
   };
-  const [errMsg, setErrMsg] = useState("");
   const [formData, setFormData] = useState(initialState);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const dispatch = useDispatch();
@@ -50,10 +49,14 @@ const Login = () => {
 
   return (
     <div className="bg-bgColor w-full h-[100vh] flex items-center justify-center p-6">
-      <div className="w-full md:w-2/3 h-fit lg:h-full 2xl:h-5/6 py-8 lg:py-0 flex bg-primary rounded-xl overflow-hidden shadow-xl">
+      <div
+        className={`w-full md:w-2/3 h-fit lg:h-full 2xl:h-5/6 py-8 lg:py-0 flex bg-primary rounded-xl overflow-hidden shadow-xl ${
+          isSignup ? "flex-row-reverse" : ""
+        }`}
+      >
         {/* Left */}
         <div className="w-full lg:w-1/2 h-full p-10 2xl:px-20 flex flex-col justify-center">
-          <div className="w-full flex gap-2 items-center mb-6">
+          <div className="w-full flex gap-2 items-center mb-6 mt-6">
             <div className="p-2 bg-[#065ad8] rounded text-white">
               <TbSocial />
             </div>
@@ -61,7 +64,16 @@ const Login = () => {
               FriendsConnect
             </span>
           </div>
-          {isSignup ? null : (
+          {isSignup ? (
+            <>
+              <p className="text-ascent-1 text-base font-semibold">
+                Join our community
+              </p>
+              <span className="text-sm mt-2 text-ascent-2">
+                Let's get you started
+              </span>
+            </>
+          ) : (
             <>
               <p className="text-ascent-1 text-base font-semibold">
                 Log in to your account
@@ -105,34 +117,8 @@ const Login = () => {
               labelStyle="ml-2"
               required="field is required"
             />
-            <div className="item-center relative">
-              {showPassword ? (
-                <AiFillEyeInvisible
-                  className="absolute right-3 bottom-4 ml-3 mt-3 h-5 w-5"
-                  color="gray"
-                  onClick={handleShowPassword}
-                />
-              ) : (
-                <BiShow
-                  className=" absolute right-3 bottom-4 ml-3 mt-3 h-5 w-5"
-                  color="gray"
-                  onClick={handleShowPassword}
-                />
-              )}
-              <TextInput
-                name="password"
-                label="Password"
-                placeholder="••••••••"
-                type={showPassword ? "text" : "password"}
-                styles="w-full rounded-full"
-                labelStyle="ml-2"
-                onChange={handleChange}
-                required="field is required"
-              />
-            </div>
-
-            {isSignup ? (
-              <div className="item-center relative">
+            <div className="w-full flex flex-col lg:flex-row gap-1 md:gap-2 justify-between">
+              <div className="flex flex-col item-center relative w-full">
                 {showPassword ? (
                   <AiFillEyeInvisible
                     className="absolute right-3 bottom-4 ml-3 mt-3 h-5 w-5"
@@ -146,9 +132,10 @@ const Login = () => {
                     onClick={handleShowPassword}
                   />
                 )}
+
                 <TextInput
-                  name="confirmPassword"
-                  label="Confirm Password"
+                  name="password"
+                  label="Password"
                   placeholder="••••••••"
                   type={showPassword ? "text" : "password"}
                   styles="w-full rounded-full"
@@ -157,9 +144,38 @@ const Login = () => {
                   required="field is required"
                 />
               </div>
-            ) : null}
 
+              {isSignup ? (
+                <div className="flex flex-col item-center relative w-full">
+                  {showPassword ? (
+                    <AiFillEyeInvisible
+                      className="absolute right-3 bottom-4 ml-3 mt-3 h-5 w-5"
+                      color="gray"
+                      onClick={handleShowPassword}
+                    />
+                  ) : (
+                    <BiShow
+                      className=" absolute right-3 bottom-4 ml-3 mt-3 h-5 w-5"
+                      color="gray"
+                      onClick={handleShowPassword}
+                    />
+                  )}
+                  <TextInput
+                    name="confirmPassword"
+                    label="Confirm Password"
+                    placeholder="••••••••"
+                    type={showPassword ? "text" : "password"}
+                    styles="w-full rounded-full"
+                    labelStyle="ml-2"
+                    onChange={handleChange}
+                    required="field is required"
+                  />
+                </div>
+              ) : null}
+            </div>
             {isSignup ? (
+              <div className="m-3"></div>
+            ) : (
               <div className="m-3">
                 <Link
                   to="/reset-password"
@@ -168,8 +184,6 @@ const Login = () => {
                   Forgot Password ?
                 </Link>
               </div>
-            ) : (
-              <div className="m-3"></div>
             )}
 
             {isSubmitting ? (
@@ -178,11 +192,11 @@ const Login = () => {
               <CustomButton
                 type="submit"
                 containerStyles={`inline-flex justify-center rounded bg-blue px-8 py-3 text-sm font-medium text-white outline-none`}
-                title="Login"
+                title={isSignup ? "Sign up" : "Login"}
               />
             )}
             {isSignup ? (
-              <div className="text-ascent-2 text-sm text-center">
+              <div className="text-ascent-2 text-sm text-center py-3">
                 Already have an account?{" "}
                 <div
                   className="text-ascent-2 font-medium hover:underline"
@@ -192,7 +206,7 @@ const Login = () => {
                 </div>
               </div>
             ) : (
-              <div className="text-ascent-2 text-sm text-center">
+              <div className="text-ascent-2 text-sm text-center py-3">
                 Don’t have an account yet?{" "}
                 <div
                   className="text-ascent-2 font-medium hover:underline"
