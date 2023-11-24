@@ -5,10 +5,10 @@ const authReducer = (state = { user: user, edit: false }, action) => {
   switch (action.type) {
     case AUTH:
       localStorage.setItem("profile", JSON.stringify({ ...action?.data }));
-      return { ...state, user: action?.data };
+      return { ...state, user: action?.data, edit: false };
     case LOGOUT:
       localStorage.clear();
-      return { ...state, user: null };
+      return { ...state, user: null, edit: false };
     case UPDATEPROFILE:
       return { ...state, edit: action?.data };
     default:

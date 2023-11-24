@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { NoProfile } from "../assets";
@@ -11,10 +12,17 @@ import {
 import { FaTwitterSquare } from "react-icons/fa";
 import { LiaEditSolid } from "react-icons/lia";
 import { CiLocationOn } from "react-icons/ci";
+import { UPDATEPROFILE } from "../constants/actionTypes";
 
 const ProfileCard = ({ user }) => {
   const { user: data, edit } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+
+  const updateProfile = () => {
+    dispatch({ type: UPDATEPROFILE, payload: !edit });
+  };
+
+  const sendFriendRequest = () => {};
 
   return (
     <div className="w-full bg-primary flex flex-col items-center shadow-sm rounded-xl px-6 py-4">
@@ -33,16 +41,73 @@ const ProfileCard = ({ user }) => {
               {user?.profession ?? "No Profession"}
             </span>
           </div>
-          <div>
-            {user?._id === data?._id ? (
-              <LiaEditSolid size={22} className="text-blue cursor-pointer" />
-            ) : (
-              <button className="bg-[#0444a430] text-sm text-white p-1 rounded">
-                <BsPersonFillAdd size={20} className="text-[#0f52b6]" />
-              </button>
-            )}
-          </div>
         </Link>
+        <div>
+          {user?._id === data?._id ? (
+            <LiaEditSolid
+              size={22}
+              className="text-blue cursor-pointer"
+              onClick={updateProfile}
+            />
+          ) : (
+            <button className="bg-[#0444a430] text-sm text-white p-1 rounded">
+              <BsPersonFillAdd
+                size={20}
+                className="text-[#0f52b6]"
+                onClick={sendFriendRequest}
+              />
+            </button> //Add friend
+          )}
+        </div>
+      </div>
+
+      <div className="w-full flex flex-col gap-2 py-4 border-b border-[#66666645]">
+        <div className="flex gap-2 items-center text-ascent-2">
+          <CiLocationOn className="text-xl text-ascent-1" />
+          <span>{user?.location ?? "Add Location"}</span>
+        </div>
+        <div className="flex gap-2 items-center text-ascent-2">
+          <BsBriefcase className=" text-lg text-ascent-1" />
+          <span>{user?.profession ?? "Add Profession"}</span>
+        </div>
+      </div>
+
+      <div className="w-full flex flex-col gap-2 py-4 border-b border-[#66666645]">
+        <p className="text-xl text-ascent-1 font-semibold">
+          {user?.friends?.length} Friends
+        </p>
+
+        <div className="flex items-center justify-between">
+          <span className="text-ascent-2">Who viewed your profile</span>
+          <span className="text-ascent-1 text-lg">{user?.views?.length}</span>
+        </div>
+
+        <span className="text-base text-blue">
+          {user?.verified ? "Verified Account" : "Not Verified"}
+        </span>
+
+        <div className="flex items-center justify-between">
+          <span className="text-ascent-2">Joined</span>
+          <span className="text-ascent-1 text-base">
+            {moment(user?.createdAt).fromNow()}
+          </span>
+        </div>
+      </div>
+      <div className="w-full flex flex-col gap-4 py-4 pb-6">
+        <p className="text-ascent-1 text-lg font-semibold">Social Profiles</p>
+
+        <div className="flex gap-2 items-center text-ascent-2">
+          <BsInstagram className=" text-xl text-ascent-1" />
+          <span>Instagram</span>
+        </div>
+        <div className="flex gap-2 items-center text-ascent-2">
+          <FaTwitterSquare className=" text-xl text-ascent-1" />
+          <span>Twitter</span>
+        </div>
+        <div className="flex gap-2 items-center text-ascent-2">
+          <BsFacebook className=" text-xl text-ascent-1" />
+          <span>Facebook</span>
+        </div>
       </div>
     </div>
   );
