@@ -9,6 +9,7 @@ import {
   FriendsCard,
   SuggestedFriendsCard,
   FriendRequestCard,
+  PostForm,
 } from "../components";
 
 const Home = () => {
@@ -24,7 +25,9 @@ const Home = () => {
           <FriendsCard friends={user?.friends} />
         </div>
         {/* Center */}
-        <div className="flex-1 h-full bg-primary px-4 flex flex-col gap-6 overflow-y-auto"></div>
+        <div className="flex-1 h-full bg-primary px-4 flex flex-col gap-6 overflow-y-auto">
+          <PostForm />
+        </div>
         {/* Right Side */}
         <div className="hidden w-1/4 h-full lg:flex flex-col gap-8 overflow-y-auto">
           {/* Friend's Request */}

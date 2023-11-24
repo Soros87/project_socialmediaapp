@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { BsPersonFillAdd } from "react-icons/bs";
 import { NoProfile } from "../assets";
 import { useState } from "react";
-import { friends } from "../assets/dummyData";
+import { suggestFriend } from "../assets/dummyData";
 
 const SuggestedFriendsCard = () => {
-  const [suggestedFriends, setSuggestedFriends] = useState(friends);
+  const [suggestedFriends, setSuggestedFriends] = useState(suggestFriend);
   const handleFriendRequest = async (id) => {
     try {
     } catch (error) {

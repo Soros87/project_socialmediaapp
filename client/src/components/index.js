@@ -6,6 +6,7 @@ import ProfileCard from "./ProfileCard";
 import FriendsCard from "./FriendsCard";
 import SuggestedFriendsCard from "./SuggestedFriendsCard";
 import FriendRequestCard from "./FriendRequestCard";
+import PostForm from "./PostForm";
 export {
   TextInput,
   Loading,
@@ -15,4 +16,5 @@ export {
   FriendsCard,
   SuggestedFriendsCard,
   FriendRequestCard,
+  PostForm,
 };

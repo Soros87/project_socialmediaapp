@@ -12,7 +12,7 @@ import {
 } from "../constants/actionTypes";
 
 //function below is a reducer - a function that is able to process our message, our Action. A reducer takes the existing state and applies the message on it. The end result is a new state.
-export default (state = { isLoading: true, posts: [] }, action) => {
+export default (state = { isLoading: false, posts: [] }, action) => {
   switch (action.type) {
     case START_LOADING:
       return { ...state, isLoading: true };
