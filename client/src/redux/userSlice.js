@@ -1,44 +1,18 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { AUTH, LOGOUT } from "../constants/actionTypes";
+const authReducer = (state = { authData: null }, action) => {
+  switch (action.type) {
+    case AUTH:
+      localStorage.setItem("profile", JSON.stringify({ ...action?.data }));
+      return { ...state, authData: action?.data };
 
-const initialState = {
-  user: JSON.parse(window?.localStorage.getItem("user")) ?? {},
-  edit: false,
+    case LOGOUT:
+      localStorage.clear();
+
+      return { ...state, authData: null };
+
+    default:
+      return state;
+  }
 };
 
-const userSlice = createSlice({
-  name: "user",
-  initialState,
-  reducers: {
-    login(state, action) {
-      state.user = action.payload;
-      localStorage.setItem("user", JSON.stringify(action.payload));
-    },
-    logout(state) {
-      state.user = null;
-      localStorage?.removeItem("user");
-    },
-    updateProfile(state, action) {
-      state.edit = action.payload;
-    },
-  },
-});
-
-export default userSlice.reducer;
-
-export function UserLogin(user) {
-  return (dispatch, getState) => {
-    dispatch(userSlice.actions.login(user));
-  };
-}
-
-export function Logout() {
-  return (dispatch, getState) => {
-    dispatch(userSlice.actions.logout());
-  };
-}
-
-export function UpdateProfile(val) {
-  return (dispatch, getState) => {
-    dispatch(userSlice.actions.updateProfile(val));
-  };
-}
+export default authReducer;

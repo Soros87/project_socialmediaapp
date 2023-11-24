@@ -158,12 +158,19 @@ const Login = () => {
                 />
               </div>
             ) : null}
-            <Link
-              to="/reset-password"
-              className="text-sm text-right text-blue font-semibold"
-            >
-              Forgot Password ?
-            </Link>
+
+            {isSignup ? (
+              <div className="m-3">
+                <Link
+                  to="/reset-password"
+                  className="text-sm text-right text-blue font-semibold"
+                >
+                  Forgot Password ?
+                </Link>
+              </div>
+            ) : (
+              <div className="m-3"></div>
+            )}
 
             {isSubmitting ? (
               ""
