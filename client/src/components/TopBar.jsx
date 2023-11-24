@@ -32,7 +32,7 @@ const TopBar = () => {
 
   const handleSearch = (e) => {};
   return (
-    <div className="topbar w-full flex items-center justify-between py-3 md:py-6 px-4 bg-primary">
+    <div className="topbar w-full flex items-center justify-between py-3 md:py-6 px-4 bg-primary rounded-xl mt-4">
       <Link to="/" className="flex gap-2 items-center">
         <div className="p-1 md:p-2 bg-[#065ad8] rounded text-white">
           <TbSocial />

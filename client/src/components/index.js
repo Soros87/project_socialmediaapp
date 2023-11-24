@@ -4,4 +4,15 @@ import CustomButton from "./CustomButton";
 import TopBar from "./TopBar";
 import ProfileCard from "./ProfileCard";
 import FriendsCard from "./FriendsCard";
-export { TextInput, Loading, CustomButton, TopBar, ProfileCard, FriendsCard };
+import SuggestedFriendsCard from "./SuggestedFriendsCard";
+import FriendRequestCard from "./FriendRequestCard";
+export {
+  TextInput,
+  Loading,
+  CustomButton,
+  TopBar,
+  ProfileCard,
+  FriendsCard,
+  SuggestedFriendsCard,
+  FriendRequestCard,
+};

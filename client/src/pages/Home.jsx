@@ -1,11 +1,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
+
 import {
   TopBar,
   Loading,
   CustomButton,
   ProfileCard,
   FriendsCard,
+  SuggestedFriendsCard,
+  FriendRequestCard,
 } from "../components";
 
 const Home = () => {
@@ -21,9 +24,14 @@ const Home = () => {
           <FriendsCard friends={user?.friends} />
         </div>
         {/* Center */}
-        <div></div>
+        <div className="flex-1 h-full bg-primary px-4 flex flex-col gap-6 overflow-y-auto"></div>
         {/* Right Side */}
-        <div></div>
+        <div className="hidden w-1/4 h-full lg:flex flex-col gap-8 overflow-y-auto">
+          {/* Friend's Request */}
+          <FriendRequestCard />
+          {/* Suggested Friends */}
+          <SuggestedFriendsCard />
+        </div>
       </div>
     </div>
   );
