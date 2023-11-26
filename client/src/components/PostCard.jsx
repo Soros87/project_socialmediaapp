@@ -5,13 +5,14 @@ import { NoProfile } from "../assets";
 import { BiComment } from "react-icons/bi";
 import { Likes, CommentForm } from "../components";
 import { MdOutlineDeleteOutline } from "react-icons/md";
+import { Loading, CommentsCard } from "../components";
 
 const PostCard = ({ post, user, deletePost, likePost }) => {
   const [showAll, setShowAll] = useState(0);
   const [likes, setLikes] = useState(post?.likes);
   const [showReply, setShowReply] = useState(0);
-  const [comments, setComments] = useState([]);
-
+  const [comments, setComments] = useState([...post?.comments]);
+  const [loading, setLoading] = useState(false);
   const [replyComments, setReplyComments] = useState(0);
   const [showComments, setShowComments] = useState(0);
 
@@ -137,6 +138,16 @@ const PostCard = ({ post, user, deletePost, likePost }) => {
               handleComments={() => handleComments(post?._id)}
             />
           </div>
+        )}
+        {loading ? (
+          <Loading />
+        ) : comments?.length > 0 ? (
+          <CommentsCard comments={comments} />
+        ) : (
+          <span className="flex text-sm py-4 text-ascent-2 text-center">
+            {" "}
+            No Comments, be first to comment
+          </span>
         )}
       </div>
     </div>
