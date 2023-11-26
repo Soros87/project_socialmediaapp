@@ -7,7 +7,7 @@ import { friendRequest as dummyFriends } from "../assets/dummyData";
 
 const FriendRequestCard = () => {
   const [friendRequest, setFriendRequest] = useState(dummyFriends);
-  console.log(friendRequest);
+
   const acceptFriendRequest = async (id, status) => {};
   return (
     <div className="w-full bg-primary shadow-sm rounded-lg px-6 py-5">

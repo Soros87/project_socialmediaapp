@@ -10,9 +10,10 @@ import {
   FETCH_POST,
   COMMENT,
 } from "../constants/actionTypes";
+import { posts } from "../assets/dummyData"; //Dummy data
 
 //function below is a reducer - a function that is able to process our message, our Action. A reducer takes the existing state and applies the message on it. The end result is a new state.
-export default (state = { isLoading: false, posts: [] }, action) => {
+export default (state = { isLoading: false, posts: posts }, action) => {
   switch (action.type) {
     case START_LOADING:
       return { ...state, isLoading: true };

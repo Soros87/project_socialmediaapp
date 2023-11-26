@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { BiImages } from "react-icons/bi";
+import { BiImages, BiSolidVideo } from "react-icons/bi";
 import { CustomButton, TextInput } from "../components";
 import { NoProfile } from "../assets";
 import { useSelector } from "react-redux";
 import { Loading } from "../components";
+import { BsFiletypeGif } from "react-icons/bs";
+import { Tooltip, Typography } from "@material-tailwind/react";
 
 const PostForm = () => {
   const { isLoading } = useSelector((state) => state.post);
@@ -51,7 +53,68 @@ const PostForm = () => {
             accept=".jpg, .png, .jpeg"
           />
           <BiImages />
-          <span className="cursor-pointer">Choose Image</span>
+          <Tooltip
+            content={
+              <div className="w-10">
+                <Typography className="text-[#2c313c] bg-bgColor text-sm inline-block">
+                  Upload
+                </Typography>
+              </div>
+            }
+          >
+            <span className="cursor-pointer relative ">Image</span>
+          </Tooltip>
+        </label>
+        <label
+          className="flex items-center gap-1 text-base text-ascent-2 hover:text-ascent-1 cursor-pointer"
+          htmlFor="videoUpload"
+        >
+          <input
+            type="file"
+            data-max-size="5120"
+            onChange={(e) => setPostData(e.target.files[0])}
+            className="hidden"
+            id="videoUpload"
+            accept=".mp4, .wav"
+          />
+          <BiSolidVideo />
+          <Tooltip
+            content={
+              <div className="w-10">
+                <Typography className="text-[#2c313c] bg-bgColor text-sm inline-block">
+                  Upload
+                </Typography>
+              </div>
+            }
+          >
+            <span className="cursor-pointer relative ">Video</span>
+          </Tooltip>
+        </label>
+
+        <label
+          className="flex items-center gap-1 text-base text-ascent-2 hover:text-ascent-1 cursor-pointer"
+          htmlFor="vgifUpload"
+        >
+          <input
+            type="file"
+            data-max-size="5120"
+            onChange={(e) => setPostData(e.target.files[0])}
+            className="hidden"
+            id="vgifUpload"
+            accept=".gif"
+          />
+          <BsFiletypeGif />
+          <Tooltip
+            content={
+              <div className="w-10">
+                <Typography className="text-[#2c313c] bg-bgColor text-sm inline-block">
+                  Upload
+                </Typography>
+              </div>
+            }
+          >
+            <span className="cursor-pointer relative ">Gif</span>
+          </Tooltip>
         </label>
         {isLoading ? (
           <Loading />

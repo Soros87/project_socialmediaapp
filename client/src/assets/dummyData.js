@@ -124,8 +124,7 @@ export const posts = [
       location: "New York, USA",
     },
     description: "Hello everyone, this is a new video. check it out. thank you",
-    image:
-      "https://res.cloudinary.com/djs3wu5bg/image/upload/v1692597858/SOCIALMEDIA/hdahstpztt1fvobc13st.png",
+    file: "https://res.cloudinary.com/djs3wu5bg/image/upload/v1692597858/SOCIALMEDIA/hdahstpztt1fvobc13st.png",
     likes: [],
     comments: [],
     createdAt: "2023-08-21T06:04:18.297Z",
@@ -164,8 +163,7 @@ export const posts = [
     createdAt: "2023-08-18T10:10:06.969Z",
     updatedAt: "2023-08-21T02:54:01.806Z",
     __v: 0,
-    image:
-      "https://res.cloudinary.com/djs3wu5bg/image/upload/v1683874458/samples/imagecon-group.jpg",
+    file: "https://res.cloudinary.com/djs3wu5bg/image/upload/v1683874458/samples/imagecon-group.jpg",
   },
   {
     _id: "64df43714a4c0d47b5369fef",
@@ -198,8 +196,7 @@ export const posts = [
     createdAt: "2023-08-18T10:07:24.023Z",
     updatedAt: "2023-08-18T10:11:00.348Z",
     __v: 0,
-    image:
-      "https://res.cloudinary.com/djs3wu5bg/image/upload/v1683874457/samples/ecommerce/leather-bag-gray.jpg",
+    file: "https://res.cloudinary.com/djs3wu5bg/image/upload/v1683874457/samples/ecommerce/leather-bag-gray.jpg",
   },
   {
     _id: "64df42b04a4c0d47b5369f77",
@@ -257,8 +254,7 @@ export const posts = [
     createdAt: "2023-08-18T09:50:48.398Z",
     updatedAt: "2023-08-21T03:36:36.745Z",
     __v: 0,
-    image:
-      "https://res.cloudinary.com/djs3wu5bg/image/upload/v1683874455/samples/animals/three-dogs.jpg",
+    file: "https://res.cloudinary.com/djs3wu5bg/image/upload/v1683874455/samples/animals/three-dogs.jpg",
   },
   {
     _id: "64df3ed06c2bd953c7b43172",
@@ -277,7 +273,6 @@ export const posts = [
     createdAt: "2023-08-18T09:50:08.431Z",
     updatedAt: "2023-08-21T03:44:36.962Z",
     __v: 0,
-    image:
-      "https://res.cloudinary.com/djs3wu5bg/image/upload/v1683874453/samples/bike.jpg",
+    file: "https://res.cloudinary.com/djs3wu5bg/image/upload/v1683874453/samples/bike.jpg",
   },
 ];
