@@ -9,6 +9,8 @@ import FriendRequestCard from "./FriendRequestCard";
 import PostForm from "./PostForm";
 import Posts from "./Posts";
 import PostCard from "./PostCard";
+import Likes from "./Likes";
+import CommentForm from "./CommentForm";
 export {
   TextInput,
   Loading,
@@ -21,4 +23,6 @@ export {
   PostForm,
   Posts,
   PostCard,
+  Likes,
+  CommentForm,
 };

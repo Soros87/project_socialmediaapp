@@ -2,43 +2,31 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { NoProfile } from "../assets";
-import { BiSolidLike, BiLike, BiComment } from "react-icons/bi";
+import { BiComment } from "react-icons/bi";
+import { Likes, CommentForm } from "../components";
+import { MdOutlineDeleteOutline } from "react-icons/md";
 
 const PostCard = ({ post, user, deletePost, likePost }) => {
   const [showAll, setShowAll] = useState(0);
   const [likes, setLikes] = useState(post?.likes);
   const [showReply, setShowReply] = useState(0);
   const [comments, setComments] = useState([]);
-  const [loading, setLoading] = useState(false);
+
   const [replyComments, setReplyComments] = useState(0);
   const [showComments, setShowComments] = useState(0);
 
-  const Likes = () => {
-    if (likes.length > 0) {
-      return likes.find((like) => like === user?._id) ? (
-        <>
-          <BiSolidLike size={20} color="blue" />
-          {likes.length > 2
-            ? `You and ${likes.length - 1} others`
-            : `${likes.length} like${likes.length > 1 ? "s" : ""}`}
-        </>
-      ) : (
-        <>
-          <BiSolidLike size={20} />
-          {likes.length} {likes.length === 1 ? "Like" : "Likes"}
-        </>
-      );
-    }
-    return (
-      <>
-        <BiLike size={20} />
-        Like
-      </>
-    );
+  const handleComments = async (id) => {
+    //Do something
+    setShowComments(showComments === post._id ? null : post._id);
+  };
+
+  const handleLike = async () => {
+    //Do something
   };
 
   return (
     <div className="mb-2 bg-primary p-4 rounded-xl">
+      {/* Display post owner detail */}
       <div className="flex gap-3 items-center mb-2">
         <Link to={"/profile/" + post?.userId?._id}>
           <img
@@ -61,7 +49,7 @@ const PostCard = ({ post, user, deletePost, likePost }) => {
           </span>
         </div>
       </div>
-
+      {/* Display post message detail */}
       <div className="flex flex-col">
         <p className="text-ascent-2">
           {showAll === post?._id
@@ -86,6 +74,7 @@ const PostCard = ({ post, user, deletePost, likePost }) => {
               </span>
             ))}
         </p>
+        {/* Display video/img/gifs */}
         {post?.file && (
           <>
             {post?.file.endsWith(".mp4") ||
@@ -106,12 +95,49 @@ const PostCard = ({ post, user, deletePost, likePost }) => {
             )}
           </>
         )}
-
+        {/* Display like and comment count */}
         <div className="mt-4 flex justify-between items-center pt-2 text-ascent-2 text-base border-t border-[#66666645]">
-          <p className="flex gap-2 items-center text-base cursor-pointer">
-            <Likes />
+          <p
+            className="flex gap-2 items-center text-base cursor-pointer"
+            onClick={handleLike}
+          >
+            <Likes post={post} user={user} />
           </p>
+          <p
+            className="flex gap-2 items-center text-base cursor-pointer"
+            onClick={() => {
+              handleComments(post?._id);
+            }}
+          >
+            <BiComment size={20} />
+            <span className="text-sm">{post?.comments?.length} </span>
+            {post?.comments?.length > 1 ? (
+              <span className="hidden md:flex text-sm">Comments</span>
+            ) : (
+              <span className="hidden md:flex text-sm">Comment</span>
+            )}
+          </p>
+          {user?._id === post?.userId?._id && (
+            <div
+              className="flex gap-1 items-center text-base cursor-pointer"
+              onClick={() => deletePost(post?._id)}
+            >
+              <MdOutlineDeleteOutline size={20} />
+
+              <span className="hidden md:flex text-sm">Delete</span>
+            </div>
+          )}
         </div>
+        {/* Display comment section */}
+        {showComments === post?._id && (
+          <div className="w-full mt-4 border-t border-[#66666645] pt-4">
+            <CommentForm
+              user={user}
+              id={post?._id}
+              handleComments={() => handleComments(post?._id)}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
