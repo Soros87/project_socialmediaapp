@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import TextInput from "./TextInput";
-import { Loading, CustomButton } from "../components";
+import { Loading } from "../components";
 import { BiSend } from "react-icons/bi";
 
 const CommentForm = ({ user, id, replyAt, handleComments }) => {

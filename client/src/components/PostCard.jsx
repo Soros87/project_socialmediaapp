@@ -18,12 +18,13 @@ const PostCard = ({ post, user, deletePost, likePost, postComments }) => {
 
   const [comments, setComments] = useState([foundComments]);
   const [loading, setLoading] = useState(false);
-  const [replyComments, setReplyComments] = useState(0);
+
   const [showComments, setShowComments] = useState(0);
 
   const handleComments = async (id) => {
     //TODO something
     setShowComments(showComments === post._id ? null : post._id);
+    //get comments from backend server
   };
 
   const handleLike = async () => {
@@ -147,7 +148,12 @@ const PostCard = ({ post, user, deletePost, likePost, postComments }) => {
         {loading ? (
           <Loading />
         ) : post?.comments?.length > 0 ? (
-          <CommentsCard comments={comments} post={post} user={user} />
+          <CommentsCard
+            comments={comments}
+            post={post}
+            user={user}
+            handleComments={handleComments}
+          />
         ) : (
           <span className="flex text-sm py-4 text-ascent-2 text-center">
             {" "}

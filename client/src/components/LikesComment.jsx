@@ -3,7 +3,7 @@ import { BiSolidLike, BiLike } from "react-icons/bi";
 
 const LikesComment = ({ comment, user }) => {
   const [likes, setLikes] = useState(comment?.likes);
-  console.log(likes);
+
   const likeIconStyle = {
     fontSize: "20px",
     color: "#065AD8", // Apply blue color directly as a style

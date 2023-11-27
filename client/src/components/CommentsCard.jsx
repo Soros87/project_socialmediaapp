@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import { NoProfile } from "../assets";
-import { LikesComment } from "../components";
+import { LikesComment, CommentForm } from "../components";
 
-const CommentsCard = ({ comments, post, user }) => {
+const CommentsCard = ({ comments, post, user, handleComments }) => {
+  const [replyComments, setReplyComments] = useState(0);
+  const [showReply, setShowReply] = useState(0);
   const handleLikeComment = (comment) => {
     //TODO something
   };
@@ -49,8 +51,42 @@ const CommentsCard = ({ comments, post, user }) => {
               >
                 <LikesComment comment={comment} user={user} />
               </p>
+              <span
+                className="text-blue text-sm cursor-pointer font-semibold"
+                onClick={() =>
+                  replyComments === 0
+                    ? setReplyComments(`${comment?._id}${index}`)
+                    : setReplyComments(0)
+                }
+              >
+                Reply
+              </span>
             </div>
+            {replyComments === `${comment?._id}${index}` && (
+              <CommentForm
+                user={user}
+                id={comment?._id}
+                replyAt={comment?.from}
+                handleComments={() => handleComments(post?._id)}
+              />
+            )}
+            {comment?.replies?.length > 0 &&
+              (comment?.replies?.length > 1 ? (
+                <button className="rounded-full hover:bg-[#B6D0E2] hover:text-white px-2 py-1">
+                  <span className="text-sm font-semibold">
+                    {comment?.replies?.length} replies{" "}
+                  </span>
+                </button>
+              ) : (
+                <button className="rounded-full hover:bg-[#B6D0E2] hover:text-white px-2 py-1">
+                  <span className="text-sm font-semibold">
+                    {comment?.replies?.length} reply{" "}
+                  </span>
+                </button>
+              ))}
           </div>
+
+          {/* REPLIES */}
         </div>
       ))}
     </>
