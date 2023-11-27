@@ -88,7 +88,7 @@ const Login = () => {
                   name="firstName"
                   label="First Name"
                   placeholder="first name"
-                  type="first name"
+                  type="text"
                   onChange={handleChange}
                   styles="w-full rounded-full"
                   labelStyle="ml-2"
@@ -98,7 +98,7 @@ const Login = () => {
                   name="lastName"
                   label="Last Name"
                   placeholder="last name"
-                  type="last name"
+                  type="text"
                   onChange={handleChange}
                   styles="w-full rounded-full"
                   labelStyle="ml-2"

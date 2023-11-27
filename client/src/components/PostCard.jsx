@@ -163,7 +163,7 @@ const PostCard = ({ post, user, deletePost, likePost, postComments }) => {
         ) : (
           <span className="flex text-sm py-4 text-ascent-2 text-center">
             {" "}
-            No Comments, be first to comment
+            No Comments, be the first to comment
           </span>
         )}
       </div>

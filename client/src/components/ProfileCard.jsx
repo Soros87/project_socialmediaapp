@@ -16,6 +16,7 @@ import { UPDATEPROFILE } from "../constants/actionTypes";
 
 const ProfileCard = ({ user }) => {
   const { user: data, edit } = useSelector((state) => state.user);
+
   const dispatch = useDispatch();
 
   const updateProfile = () => {

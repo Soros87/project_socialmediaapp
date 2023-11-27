@@ -15,6 +15,7 @@ import CommentsCard from "./CommentsCard";
 import LikesComment from "./LikesComment";
 import ReplyCard from "./ReplyCard";
 import LikesReply from "./LikesReply";
+import EditProfile from "./EditProfile";
 export {
   TextInput,
   Loading,
@@ -33,4 +34,5 @@ export {
   LikesComment,
   ReplyCard,
   LikesReply,
+  EditProfile,
 };
