@@ -12,6 +12,7 @@ import PostCard from "./PostCard";
 import LikesPost from "./LikesPost";
 import CommentForm from "./CommentForm";
 import CommentsCard from "./CommentsCard";
+import LikesComment from "./LikesComment";
 export {
   TextInput,
   Loading,
@@ -27,4 +28,5 @@ export {
   LikesPost,
   CommentForm,
   CommentsCard,
+  LikesComment,
 };

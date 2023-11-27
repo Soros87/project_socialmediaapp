@@ -2,6 +2,7 @@ import React from "react";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import { NoProfile } from "../assets";
+import { LikesComment } from "../components";
 
 const CommentsCard = ({ comments, post, user }) => {
   const handleLikeComment = (comment) => {
@@ -45,7 +46,9 @@ const CommentsCard = ({ comments, post, user }) => {
                 onClick={() => {
                   handleLikeComment(comment);
                 }}
-              ></p>
+              >
+                <LikesComment comment={comment} user={user} />
+              </p>
             </div>
           </div>
         </div>
