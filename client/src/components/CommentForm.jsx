@@ -4,7 +4,6 @@ import { Loading, CustomButton } from "../components";
 import { BiSend } from "react-icons/bi";
 
 const CommentForm = ({ user, id, replyAt, handleComments }) => {
-  const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(false);
 
   return (

@@ -7,11 +7,17 @@ import { Likes, CommentForm } from "../components";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { Loading, CommentsCard } from "../components";
 
-const PostCard = ({ post, user, deletePost, likePost }) => {
+const PostCard = ({ post, user, deletePost, likePost, postComments }) => {
   const [showAll, setShowAll] = useState(0);
   const [likes, setLikes] = useState(post?.likes);
   const [showReply, setShowReply] = useState(0);
-  const [comments, setComments] = useState([...post?.comments]);
+
+  const foundComments = postComments.find((commentArray) =>
+    commentArray.some((comment) => comment._id === post._id)
+  );
+
+  const [comments, setComments] = useState([foundComments]);
+  console.log("comments", comments);
   const [loading, setLoading] = useState(false);
   const [replyComments, setReplyComments] = useState(0);
   const [showComments, setShowComments] = useState(0);
@@ -141,8 +147,8 @@ const PostCard = ({ post, user, deletePost, likePost }) => {
         )}
         {loading ? (
           <Loading />
-        ) : comments?.length > 0 ? (
-          <CommentsCard comments={comments} />
+        ) : post?.comments?.length > 0 ? (
+          <CommentsCard comments={comments} post={post} />
         ) : (
           <span className="flex text-sm py-4 text-ascent-2 text-center">
             {" "}
