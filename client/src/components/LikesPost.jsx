@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BiSolidLike, BiLike } from "react-icons/bi";
 
-const Likes = ({ post, user }) => {
+const LikesPost = ({ post, user }) => {
   const [likes, setLikes] = useState(post?.likes);
   const likeIconStyle = {
     fontSize: "20px",
@@ -34,4 +34,4 @@ const Likes = ({ post, user }) => {
   );
 };
 
-export default Likes;
+export default LikesPost;

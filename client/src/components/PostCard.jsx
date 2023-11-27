@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 import { NoProfile } from "../assets";
 import { BiComment } from "react-icons/bi";
-import { Likes, CommentForm } from "../components";
+import { LikesPost, CommentForm } from "../components";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { Loading, CommentsCard } from "../components";
 
@@ -17,18 +17,17 @@ const PostCard = ({ post, user, deletePost, likePost, postComments }) => {
   );
 
   const [comments, setComments] = useState([foundComments]);
-  console.log("comments", comments);
   const [loading, setLoading] = useState(false);
   const [replyComments, setReplyComments] = useState(0);
   const [showComments, setShowComments] = useState(0);
 
   const handleComments = async (id) => {
-    //Do something
+    //TODO something
     setShowComments(showComments === post._id ? null : post._id);
   };
 
   const handleLike = async () => {
-    //Do something
+    //TODO something
   };
 
   return (
@@ -108,7 +107,7 @@ const PostCard = ({ post, user, deletePost, likePost, postComments }) => {
             className="flex gap-2 items-center text-base cursor-pointer"
             onClick={handleLike}
           >
-            <Likes post={post} user={user} />
+            <LikesPost post={post} user={user} />
           </p>
           <p
             className="flex gap-2 items-center text-base cursor-pointer"
@@ -148,7 +147,7 @@ const PostCard = ({ post, user, deletePost, likePost, postComments }) => {
         {loading ? (
           <Loading />
         ) : post?.comments?.length > 0 ? (
-          <CommentsCard comments={comments} post={post} />
+          <CommentsCard comments={comments} post={post} user={user} />
         ) : (
           <span className="flex text-sm py-4 text-ascent-2 text-center">
             {" "}

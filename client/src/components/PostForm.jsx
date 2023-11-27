@@ -17,7 +17,7 @@ const PostForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault(); //event - not to get the refresh in the browser
-    //do something
+    //TODO
   };
 
   return (

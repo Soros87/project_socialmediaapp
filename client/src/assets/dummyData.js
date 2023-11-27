@@ -290,6 +290,7 @@ export const comments = [
       createdAt: "2023-08-21T02:54:01.806Z",
       updatedAt: "2023-08-21T02:54:01.806Z",
       from: "User One",
+      likes: ["64df39704180b81adfe41d0b"],
     },
   ],
   [
@@ -304,6 +305,7 @@ export const comments = [
       createdAt: "2023-08-18T09:51:52.000Z",
       updatedAt: "2023-08-18T09:51:52.000Z",
       from: "User One",
+      likes: [],
     },
     {
       _id: "64df3ef86c2bd953c7b43193",
@@ -316,6 +318,7 @@ export const comments = [
       createdAt: "2023-08-18T09:53:37.000Z",
       updatedAt: "2023-08-18T09:53:37.000Z",
       from: "User One",
+      likes: ["64df3c064180b81adfe41d4b", "64e2fe620d7868ecff1a6a86"],
     },
     {
       _id: "64df3ef86c2bd953c7b43193",
@@ -328,6 +331,7 @@ export const comments = [
       createdAt: "2023-08-18T10:11:12.000Z",
       updatedAt: "2023-08-18T10:11:12.000Z",
       from: "User One",
+      likes: [],
     },
   ],
   [
@@ -342,6 +346,7 @@ export const comments = [
       createdAt: "2023-08-21T03:44:36.962Z",
       updatedAt: "2023-08-21T03:44:36.962Z",
       from: "John Smith",
+      likes: ["64e2fe620d7868ecff1a6a86"],
     },
   ],
 ];

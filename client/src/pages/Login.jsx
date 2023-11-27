@@ -22,12 +22,11 @@ const initialState = {
 const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
 
     if (isSignup) {
-      //Do signup
+      //TODO signup
     } else {
-      //Do login
+      //TODO login
     }
   };
   const [formData, setFormData] = useState(initialState);

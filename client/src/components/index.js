@@ -9,7 +9,7 @@ import FriendRequestCard from "./FriendRequestCard";
 import PostForm from "./PostForm";
 import Posts from "./Posts";
 import PostCard from "./PostCard";
-import Likes from "./Likes";
+import LikesPost from "./LikesPost";
 import CommentForm from "./CommentForm";
 import CommentsCard from "./CommentsCard";
 export {
@@ -24,7 +24,7 @@ export {
   PostForm,
   Posts,
   PostCard,
-  Likes,
+  LikesPost,
   CommentForm,
   CommentsCard,
 };

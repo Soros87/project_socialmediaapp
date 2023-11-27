@@ -26,9 +26,9 @@ const ResetPassword = () => {
     console.log(formData);
 
     if (isSignup) {
-      //Do signup
+      //TODO signup
     } else {
-      //Do login
+      //TODO login
     }
   };
 
