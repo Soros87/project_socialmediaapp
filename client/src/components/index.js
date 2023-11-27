@@ -13,6 +13,8 @@ import LikesPost from "./LikesPost";
 import CommentForm from "./CommentForm";
 import CommentsCard from "./CommentsCard";
 import LikesComment from "./LikesComment";
+import ReplyCard from "./ReplyCard";
+import LikesReply from "./LikesReply";
 export {
   TextInput,
   Loading,
@@ -29,4 +31,6 @@ export {
   CommentForm,
   CommentsCard,
   LikesComment,
+  ReplyCard,
+  LikesReply,
 };

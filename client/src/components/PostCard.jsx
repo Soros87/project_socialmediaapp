@@ -31,6 +31,10 @@ const PostCard = ({ post, user, deletePost, likePost, postComments }) => {
     //TODO something
   };
 
+  const handleDelete = async () => {
+    //TODO something
+  };
+
   return (
     <div className="mb-2 bg-primary p-4 rounded-xl">
       {/* Display post owner detail */}
@@ -127,7 +131,7 @@ const PostCard = ({ post, user, deletePost, likePost, postComments }) => {
           {user?._id === post?.userId?._id && (
             <div
               className="flex gap-1 items-center text-base cursor-pointer"
-              onClick={() => deletePost(post?._id)}
+              onClick={() => handleDelete(post?._id)}
             >
               <MdOutlineDeleteOutline size={20} />
 
@@ -153,6 +157,8 @@ const PostCard = ({ post, user, deletePost, likePost, postComments }) => {
             post={post}
             user={user}
             handleComments={handleComments}
+            handleLike={handleLike}
+            handleDelete={handleDelete}
           />
         ) : (
           <span className="flex text-sm py-4 text-ascent-2 text-center">

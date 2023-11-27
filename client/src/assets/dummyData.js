@@ -293,10 +293,18 @@ export const comments = [
       likes: ["64df39704180b81adfe41d0b"],
       replies: [
         {
-          _id: "64df39704180b81adfe41d0b",
+          userId: {
+            _id: "64df43e04a4c0d47b536a02a",
+            firstName: "John",
+            lastName: "Bruce",
+            profileUrl:
+              "https://res.cloudinary.com/djs3wu5bg/image/upload/v1683874470/cld-sample.jpg",
+          },
           reply: "What do you mean",
+          from: "John Bruce",
           createdAt: "2023-09-21T02:54",
           updatedAt: "2023-09-21T02:54",
+          likes: [],
         },
       ],
     },
@@ -330,16 +338,30 @@ export const comments = [
       likes: ["64df3c064180b81adfe41d4b", "64e2fe620d7868ecff1a6a86"],
       replies: [
         {
-          _id: "64df424b4a4c0d47b5369f65",
+          userId: {
+            _id: "64df424b4a4c0d47b5369f65",
+            firstName: "User",
+            lastName: "One",
+          },
+          from: "User One",
           reply: "What are you thinking bro",
           createdAt: "2023-09-21T02:54",
           updatedAt: "2023-09-21T02:54",
+          likes: [],
         },
         {
-          _id: "64df39704180b81adfe41d0b",
+          userId: {
+            _id: "64df43e04a4c0d47b536a02a",
+            firstName: "John",
+            lastName: "Bruce",
+            profileUrl:
+              "https://res.cloudinary.com/djs3wu5bg/image/upload/v1683874470/cld-sample.jpg",
+          },
           reply: "Issit working",
+          from: "John Bruce",
           createdAt: "2023-09-21T02:54",
           updatedAt: "2023-09-21T02:54",
+          likes: ["64df39704180b81adfe41d0b"],
         },
       ],
     },
@@ -373,10 +395,32 @@ export const comments = [
       likes: ["64e2fe620d7868ecff1a6a86"],
       replies: [
         {
-          _id: "64df39704180b81adfe41d0b",
+          userId: {
+            _id: "64df43e04a4c0d47b536a02a",
+            firstName: "John",
+            lastName: "Bruce",
+            profileUrl:
+              "https://res.cloudinary.com/djs3wu5bg/image/upload/v1683874470/cld-sample.jpg",
+          },
           reply: "Doggy dog dog",
+          from: "John Bruce",
           createdAt: "2023-10-21T03:44:36.962Z",
           updatedAt: "2023-10-21T03:44:36.962Z",
+          likes: ["64e2dc8577e497bd3a0bf843", "64df39704180b81adfe41d0b"],
+        },
+        {
+          userId: {
+            _id: "64df3c064180b81adfe41d4b",
+            firstName: "Code",
+            lastName: "Wave",
+            profileUrl:
+              "https://res.cloudinary.com/djs3wu5bg/image/upload/v1683874454/samples/people/boy-snow-hoodie.jpg",
+          },
+          reply: "hello momo",
+          from: "Code Wave",
+          createdAt: "2023-10-21T03:44:36.962Z",
+          updatedAt: "2023-10-21T03:44:36.962Z",
+          likes: [],
         },
       ],
     },
