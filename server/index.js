@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
 import morgan from "morgan";
+import errorMiddleware from "./middleware/errorMiddleware.js";
 
 //security package
 import helmet from "helmet";
@@ -13,9 +14,13 @@ const app = express();
 dotenv.config();
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
+
+app.use(helmet());
 app.use(cors()); //need to have the cors above the app.use()
 app.use(morgan("dev"));
-app.use(helmet());
+
+//error middleware
+app.use(errorMiddleware);
 
 mongoose
   .connect(process.env.CONNECTION_URL, {
