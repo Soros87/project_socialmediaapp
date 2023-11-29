@@ -2,6 +2,7 @@ import Users from "../models/userModel.js";
 import mongoose from "mongoose";
 import { compareString, createJWT, hashString } from "../utils/index.js";
 import Verification from "../models/emailVerificationModel.js";
+import { resetPasswordLink } from "../utils/sendEmail.js";
 
 export const verifyEmail = async (req, res) => {
   //user is directed to the link = APP_URL + "users/verify/" + _id + "/" + token;
@@ -72,5 +73,37 @@ export const verifyEmail = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.redirect(`/users/verified?message=${error.message}`);
+  }
+};
+
+export const requestPasswordReset = async (req, res) => {
+  const { email } = req.body;
+
+  // check if user exists
+  const user = await Users.findOne({ email });
+
+  try {
+    if (!user) {
+      return res
+        .status(404)
+        .json({ status: "FAILED", message: "Email address not found" });
+    }
+
+    //if user exists send password reset email to user
+    const existingRequest = await PasswordReset.findOne({ email });
+    if (existingRequest) {
+      if (existingRequest.expiresAt > Date.now()) {
+        return res.status(201).json({
+          status: "PENDING",
+          message: "Reset password link has already been sent to your email.",
+        });
+      }
+      //if existing request and token not expired delete existing request
+      await PasswordReset.findOneAndDelete({ email });
+    }
+    await resetPasswordLink(user, res);
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ message: error.message });
   }
 };

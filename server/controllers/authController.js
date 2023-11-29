@@ -81,6 +81,7 @@ export const signin = async (req, res, next) => {
     //For security reasons to prevent the hashed password from being sent back in the response when logging in.
     existingUser.password = undefined;
 
+    const token = createJWT(existingUser?._id);
     //response
     res.status(201).json({
       success: true,
@@ -88,8 +89,6 @@ export const signin = async (req, res, next) => {
       existingUser,
       token,
     });
-
-    const token = createJWT(existingUser?._id);
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Something went wrong" });
