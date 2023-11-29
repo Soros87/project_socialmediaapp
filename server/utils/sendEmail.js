@@ -1,22 +1,23 @@
-import React from "react";
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
 import { v4 as uuidv4 } from "uuid";
 import { hashString } from "./index.js";
-import Verification from "../models/emailVerification.js";
+import Verification from "../models/emailVerificationModel.js";
 
 dotenv.config();
 
 const { AUTH_EMAIL, AUTH_PASSWORD, APP_URL } = process.env;
 
+//used in the sendVerificationEmail function
 const transporter = nodemailer.createTransport({
-  host: "smtp.forwardemail.net",
+  service: "gmail",
+  host: "smtp.gmail.com",
   port: 587,
-  secure: true,
+  secure: false, //true for 465 false for other ports
   auth: {
     // TODO: replace `user` and `pass` values from <https://forwardemail.net>
     user: AUTH_EMAIL,
-    pass: AUTH_PASSWORD,
+    pass: AUTH_PASSWORD, //app password
   },
 });
 
@@ -67,13 +68,7 @@ export const sendVerificationEmail = async (user, res) => {
     if (newVerifiedEmail) {
       transporter
         .sendMail(mailOptions)
-        .then(() => {
-          res.status(201).send({
-            success: "PENDING",
-            message:
-              "Verification email has been sent to your account. Check your email for further instructions.",
-          });
-        })
+
         .catch((err) => {
           console.log(err);
           res.status(404).json({ message: "Something went wrong" });

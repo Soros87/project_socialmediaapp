@@ -25,9 +25,6 @@ export const signup = async (req, res) => {
     //hasPassword uses a salt (random data input) to hash the password - see utils
     const hashedPassword = await hashString(password);
 
-    //send email verification to user
-    sendVerificationEmail(user, res);
-
     //Create user in db
     const user = await Users.create({
       firstName,
@@ -36,7 +33,14 @@ export const signup = async (req, res) => {
       password: hashedPassword,
     });
 
-    res.status(201).json({ result, token });
+    //send email verification to user - do this after user is created in db
+    sendVerificationEmail(user, res); //FIXME no free version
+
+    //response
+    res.status(201).json({
+      success: true,
+      message: "Sign up successful",
+    });
   } catch (error) {
     res.status(500).json({ message: "Something went wrong" });
 
@@ -44,7 +48,7 @@ export const signup = async (req, res) => {
   }
 };
 
-export const signin = async (req, res) => {
+export const signin = async (req, res, next) => {
   const { email, password } = req.body;
 
   //validation
