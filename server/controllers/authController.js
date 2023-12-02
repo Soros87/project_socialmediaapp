@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import { compareString, createJWT, hashString } from "../utils/index.js";
 import { sendVerificationEmail } from "../utils/sendEmail.js";
 
+//Register user
 export const signup = async (req, res) => {
   const { email, password, confirmPassword, firstName, lastName } = req.body;
 
@@ -34,7 +35,7 @@ export const signup = async (req, res) => {
     });
 
     //send email verification to user - do this after user is created in db
-    sendVerificationEmail(user, res); //FIXME no free version
+    sendVerificationEmail(user, res); //FIXME currently using gmail instead of own domain
 
     //response
     res.status(201).json({
@@ -47,7 +48,7 @@ export const signup = async (req, res) => {
     console.log(error);
   }
 };
-
+//login user
 export const signin = async (req, res, next) => {
   const { email, password } = req.body;
 
@@ -57,7 +58,12 @@ export const signin = async (req, res, next) => {
     return;
   }
   try {
-    const existingUser = await Users.findOne({ email });
+    const existingUser = await await Users.findOne({ email })
+      .select("+password")
+      .populate({
+        path: "friends",
+        select: "firstName lastName location profileUrl -password",
+      });
 
     //check if User exists in database
     if (!existingUser) {

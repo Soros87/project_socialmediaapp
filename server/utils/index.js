@@ -1,8 +1,5 @@
 import bcrypt from "bcryptjs";
 import JWT from "jsonwebtoken";
-import dotenv from "dotenv";
-
-dotenv.config();
 
 //hash String or password
 export const hashString = async (useValue) => {
