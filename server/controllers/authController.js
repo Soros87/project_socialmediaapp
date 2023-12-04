@@ -37,11 +37,7 @@ export const signup = async (req, res) => {
     //send email verification to user - do this after user is created in db
     sendVerificationEmail(user, res); //FIXME currently using gmail instead of own domain
 
-    //response
-    res.status(201).json({
-      success: true,
-      message: "Sign up successful",
-    });
+    //no need response as this is handled by sendVerificationEmail
   } catch (error) {
     res.status(500).json({ message: "Something went wrong" });
 

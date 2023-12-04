@@ -260,7 +260,7 @@ export const updateUser = async (req, res) => {
   }
 };
 //send friendRequest
-export const friendRequest = async (req, res) => {
+export const friendRequest = async (req, res, next) => {
   try {
     const { userId } = req.body.user;
     const { requestTo } = req.body;
@@ -328,7 +328,7 @@ export const getFriendRequest = async (req, res) => {
   }
 };
 
-export const acceptRequest = async (req, res) => {
+export const acceptRequest = async (req, res, next) => {
   try {
     const { userId } = req.body.user;
     const { requestId, status } = req.body;
@@ -371,5 +371,63 @@ export const acceptRequest = async (req, res) => {
     res
       .status(500)
       .json({ message: "auth error", success: false, error: error.message });
+  }
+};
+//view profiles
+export const profileViews = async (req, res, next) => {
+  try {
+    const { userId } = req.body.user; //your own id
+    const { id } = req.body; //the user you are viewing
+
+    const user = await Users.findById(userId);
+
+    if (!user) {
+      next("User not found");
+      return;
+    }
+
+    user.views.push(userId); //update the views array with the users' id
+
+    await user.save();
+
+    res
+      .status(200)
+      .json({ success: true, message: "Successfully viewed profile" });
+  } catch (error) {
+    console.log(error);
+    success: false;
+    res.status.json({ message: "auth error", error: error.message });
+  }
+};
+//suggest Friends
+export const suggestedFriends = async (req, res) => {
+  try {
+    const { userId } = req.body.user;
+
+    // Create a query object to find suggested friends
+    let queryObject = {};
+
+    // Exclude the user's own ID from suggested friends
+    queryObject._id = { $ne: userId };
+
+    // Exclude the user's existing friends from suggested friends
+    queryObject.friends = { $nin: userId };
+
+    // Query the database (assuming 'Users' is a MongoDB model)
+    let queryResult = Users.find(queryObject)
+      .limit(15)
+      .select("firstName lastName profileUrl profession -password");
+
+    // Execute the query and wait for the result using await
+    const suggestedFriends = await queryResult;
+
+    // Send a successful response with suggestedFriends data
+    res.status(200).json({
+      success: true,
+      data: suggestedFriends,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ message: error.message });
   }
 };
