@@ -11,7 +11,7 @@ const PostForm = () => {
   const { isLoading } = useSelector((state) => state.post);
   const { user } = useSelector((state) => state.user);
   const [postData, setPostData] = useState({
-    image: "",
+    selectedFile: "",
     description: "",
   });
 

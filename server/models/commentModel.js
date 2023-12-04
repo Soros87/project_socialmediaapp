@@ -12,7 +12,7 @@ const commentSchema = new mongoose.Schema(
         userId: { type: Schema.Types.ObjectId, ref: "Users" },
         from: { type: String },
         replyAt: { type: String },
-        comment: { type: String },
+        reply: { type: String },
         created_At: { type: Date, default: Date.now() },
         updated_At: { type: Date, default: Date.now() },
         likes: [{ type: String }],
