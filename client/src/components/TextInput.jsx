@@ -6,8 +6,8 @@ const TextInput = ({
   styles,
   label,
   labelStyles,
-  handleChange,
   name,
+  onChange,
   required,
 }) => {
   return (
@@ -19,10 +19,11 @@ const TextInput = ({
         <input
           type={type}
           name={name}
+          id={name}
           placeholder={placeholder}
           className={`w-full bg-secondary rounded border border-[#66666690] outline-none text-sm text-ascent-1 px-4 py-3 placeholder:text-[#666]${styles}`}
-          onChange={handleChange}
           required={required}
+          onChange={onChange}
         />
       </div>
     </div>

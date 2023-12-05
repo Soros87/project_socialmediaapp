@@ -5,9 +5,7 @@ import { Loading, PostCard } from "../components";
 const Posts = () => {
   const { posts, isLoading } = useSelector((state) => state.post);
   const { user } = useSelector((state) => state.user);
-  const { comments, isLoading: Loading } = useSelector(
-    (state) => state.comment
-  );
+  const { comments } = useSelector((state) => state.comment);
 
   const handleLikePost = async (uri) => {};
 

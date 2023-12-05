@@ -1,7 +1,7 @@
 import { AUTH, LOGOUT, UPDATEPROFILE } from "../constants/actionTypes";
-import { user } from "../assets/dummyData"; //Dummy data
+// import { user } from "../assets/dummyData"; //Dummy data
 
-const authReducer = (state = { user: user, edit: false }, action) => {
+const authReducer = (state = { user: null, edit: false }, action) => {
   switch (action.type) {
     case AUTH:
       localStorage.setItem("profile", JSON.stringify({ ...action?.data }));

@@ -1,6 +1,6 @@
 import React from "react";
 import { TbSocial } from "react-icons/tb";
-import { TextInput, CustomButton } from "../components";
+import { TextInput, CustomButton, Loading } from "../components";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -28,27 +28,41 @@ const Login = () => {
   const navigateTo = useNavigate();
   const [isSignup, setIsSignup] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
+
+  //switch between sign in or sign up
   const switchMode = () => {
     setIsSignup((prevIsSignup) => !prevIsSignup);
     setShowPassword(false);
   };
+
+  //submit the login/signup form to the backend server
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
 
-    if (isSignup) {
-      // signup
-      dispatch(signup(formData, navigateTo));
-    } else {
-      // login
-      dispatch(signin(formData, navigateTo));
+    try {
+      if (isSignup) {
+        // signup
+        dispatch(signup(formData, navigateTo));
+      } else {
+        // login
+        dispatch(signin(formData, navigateTo));
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
+
+  //show or hide the password field
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
+
+  //set the form data based on user input
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    // console.log(`Name: ${name}, Value: ${value}`);
+    setFormData({ ...formData, [name]: value });
   };
 
   return (
@@ -191,7 +205,7 @@ const Login = () => {
             )}
 
             {isSubmitting ? (
-              ""
+              <Loading />
             ) : (
               <CustomButton
                 type="submit"

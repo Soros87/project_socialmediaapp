@@ -24,8 +24,6 @@ export default (state = { isLoading: false, posts: posts }, action) => {
       return {
         ...state,
         posts: action.payload.data,
-        currentPage: action.payload.currentPage,
-        numberOfPages: action.payload.numberOfPages,
       };
 
     case FETCH_BY_SEARCH:

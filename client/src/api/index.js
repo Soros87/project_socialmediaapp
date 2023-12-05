@@ -38,11 +38,11 @@ export const signUp = (formData) => API.post("/auth/signup", formData);
 export const requestPasswordReset = (formData) =>
   API.post("/users/request-passwordreset", formData);
 export const getUser = (id) => API.get(`/users/get-user/${id}`);
-export const updateUser = (id) => API.put(`/users/update-user/${id}`);
+export const updateUser = (formData) => API.put("/users/update-user", formData);
 export const friendRequest = (reqTo) =>
   API.post(`/users/friend-request`, reqTo);
 export const getFriendRequest = () => API.get("/users/get-friend-request");
-export const acceptFriendRequest = ({ id, status }) =>
+export const acceptFriendRequest = (id, status) =>
   API.post("/users/accept-request", { rid: id, status });
 export const viewProfile = (id) => API.post("/users/profile-view", id);
 export const suggestedFriends = () => API.get("/users/suggested-friends");

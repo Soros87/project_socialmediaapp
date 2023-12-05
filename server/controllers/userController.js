@@ -361,10 +361,15 @@ export const acceptRequest = async (req, res, next) => {
 
       await friend.save();
     }
+    //Fetch updated user and friend details after modifications
+    const updatedUser = await Users.findById(userId);
+    const updatedFriend = await Users.findById(newRequest?.requestFrom);
 
     res.status(201).json({
       success: true,
       message: "Friend Request " + status,
+      user: updatedUser,
+      friend: updatedFriend,
     });
   } catch (error) {
     console.log(error);
@@ -379,14 +384,14 @@ export const profileViews = async (req, res, next) => {
     const { userId } = req.body.user; //your own id
     const { id } = req.body; //the user you are viewing
 
-    const user = await Users.findById(userId);
+    const user = await Users.findById(id);
 
     if (!user) {
       next("User not found");
       return;
     }
 
-    user.views.push(userId); //update the views array with the users' id
+    user.views.push(userId); //update the user's (that you are viewing) views array with the users' id
 
     await user.save();
 

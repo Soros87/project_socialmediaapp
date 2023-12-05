@@ -1,6 +1,6 @@
 import {
   FETCH_ALL,
-  CREATE,
+  COMMENT,
   UPDATE,
   DELETE,
   LIKE,
@@ -21,19 +21,17 @@ export default (state = { isLoading: false, comments: comments }, action) => {
       //payload comes from posts.js in ../src/action
       return {
         ...state,
-        posts: action.payload.data,
-        currentPage: action.payload.currentPage,
-        numberOfPages: action.payload.numberOfPages,
+        comments: action.payload.data,
       };
 
-    case CREATE:
-      return { ...state, posts: [...state.posts, action.payload] };
+    case COMMENT:
+      return { ...state, comments: [...state.comments, action.payload] };
 
     case UPDATE:
     case LIKE:
       return {
         ...state,
-        posts: state.posts.map((post) =>
+        comments: state.comments.map((post) =>
           post._id === action.payload._id ? action.payload : post
         ),
       };
@@ -41,7 +39,7 @@ export default (state = { isLoading: false, comments: comments }, action) => {
     case REPLY:
       return {
         ...state,
-        posts: state.posts.map((post) => {
+        comments: state.comments.map((post) => {
           if (post._id === +action.payload._id) {
             return action.payload;
           }
@@ -51,7 +49,7 @@ export default (state = { isLoading: false, comments: comments }, action) => {
     case DELETE:
       return {
         ...state,
-        posts: state.posts.filter((post) => post._id !== action.payload),
+        comments: state.comments.filter((post) => post._id !== action.payload),
       };
     default:
       return state;

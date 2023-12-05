@@ -27,7 +27,7 @@ router.post("/reset-password/:userId", changePassword);
 
 //user routes :id? optional for own user's posts.
 router.get("/get-user/:id?", userAuth, getUser);
-router.put("/update-user/:id", userAuth, updateUser);
+router.put("/update-user", userAuth, updateUser);
 
 //friend request
 router.post("/friend-request", userAuth, friendRequest);
