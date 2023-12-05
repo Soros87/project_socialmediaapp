@@ -40,7 +40,7 @@ router.post("/accept-request", userAuth, acceptRequest);
 router.post("/profile-view", userAuth, profileViews);
 
 //suggested friends
-router.post("/suggested-friends", userAuth, suggestedFriends);
+router.get("/suggested-friends", userAuth, suggestedFriends);
 
 //render html
 router.get("/verified", (req, res) => {

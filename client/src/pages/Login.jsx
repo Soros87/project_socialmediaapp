@@ -4,12 +4,14 @@ import { TextInput, CustomButton } from "../components";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { BgImg } from "../assets";
 import { BsShare } from "react-icons/bs";
 import { ImConnection } from "react-icons/im";
 import { AiOutlineInteraction } from "react-icons/ai";
 import { BiShow } from "react-icons/bi";
 import { AiFillEyeInvisible } from "react-icons/ai";
+import { signin, signup } from "../actions/auth";
 
 const initialState = {
   firstName: "",
@@ -20,25 +22,28 @@ const initialState = {
 };
 
 const Login = () => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (isSignup) {
-      //TODO signup
-    } else {
-      //TODO login
-    }
-  };
   const [formData, setFormData] = useState(initialState);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const dispatch = useDispatch();
+  const navigateTo = useNavigate();
   const [isSignup, setIsSignup] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const switchMode = () => {
     setIsSignup((prevIsSignup) => !prevIsSignup);
     setShowPassword(false);
   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
 
+    if (isSignup) {
+      // signup
+      dispatch(signup(formData, navigateTo));
+    } else {
+      // login
+      dispatch(signin(formData, navigateTo));
+    }
+  };
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
