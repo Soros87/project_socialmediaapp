@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Loading, PostCard } from "../components";
-import { getPosts } from "../actions/posts";
+import { getPosts, deletePost } from "../actions/posts";
 
 const Posts = () => {
   const { posts, isLoading } = useSelector((state) => state.post);
@@ -9,17 +9,25 @@ const Posts = () => {
   const { user } = useSelector((state) => state.user);
   const { comments } = useSelector((state) => state.comment);
 
+  //sort the posts with the most recent at the top
+  const sortedPosts = [...posts].sort((a, b) => {
+    // 'createdAt' is the property holding the timestamp in each post object
+    return new Date(b.createdAt) - new Date(a.createdAt);
+  });
+
   const handleLikePost = async (uri) => {
     //TODO
   };
 
   const handleDelete = async (id) => {
     //TODO
+    dispatch(deletePost(id));
   };
 
   const fetchPosts = async () => {
     //TODO
     dispatch(getPosts());
+
     //setPosts(res?.data) // res.data is an array of posts
   };
 
@@ -27,22 +35,17 @@ const Posts = () => {
     //TO DO
   };
 
-  useEffect(() => {
-    fetchPosts();
-    getComments();
-  }, [dispatch]);
-
   return (
     <>
       {isLoading ? (
         <Loading />
-      ) : posts?.length > 0 ? (
-        posts?.map((post) => (
+      ) : sortedPosts?.length > 0 ? (
+        sortedPosts.map((post) => (
           <PostCard
             post={post}
             key={post?._id}
             user={user}
-            deletePost={handleDelete}
+            handleDelete={handleDelete}
             likePost={handleLikePost}
             postComments={comments}
           />

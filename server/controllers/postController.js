@@ -20,7 +20,7 @@ export const createPost = async (req, res, next) => {
       selectedFile,
     });
 
-    res.status(201).json({ posts: newPost });
+    res.status(201).json(newPost);
   } catch (error) {
     console.log(error);
     res.status(404).json({ message: error.message });

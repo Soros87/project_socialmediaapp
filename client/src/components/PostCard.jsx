@@ -6,11 +6,16 @@ import { BiComment } from "react-icons/bi";
 import { LikesPost, CommentForm } from "../components";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { Loading, CommentsCard } from "../components";
+import { useDispatch } from "react-redux";
 
-const PostCard = ({ post, user, deletePost, likePost, postComments }) => {
+const PostCard = ({ post, user, handleDelete, likePost, postComments }) => {
+  const dispatch = useDispatch;
   const [showAll, setShowAll] = useState(0);
   const [likes, setLikes] = useState(post?.likes);
   const [showReply, setShowReply] = useState(0);
+  const [currentUser, setCurrentUser] = useState(
+    JSON.parse(localStorage.getItem("profile"))
+  );
 
   const foundComments = postComments?.find((commentArray) =>
     commentArray.some((comment) => comment._id === post._id)
@@ -28,10 +33,6 @@ const PostCard = ({ post, user, deletePost, likePost, postComments }) => {
   };
 
   const handleLike = async () => {
-    //TODO something
-  };
-
-  const handleDelete = async () => {
     //TODO something
   };
 
@@ -128,7 +129,7 @@ const PostCard = ({ post, user, deletePost, likePost, postComments }) => {
               <span className="hidden md:flex text-sm">Comment</span>
             )}
           </p>
-          {user?._id === post?.userId?._id && (
+          {currentUser?.user?._id === post?.userId?._id && (
             <div
               className="flex gap-1 items-center text-base cursor-pointer"
               onClick={() => handleDelete(post?._id)}

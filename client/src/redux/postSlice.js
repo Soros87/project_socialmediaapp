@@ -31,12 +31,12 @@ export default (state = { isLoading: false, posts: [] }, action) => {
       return { ...state, posts: action.payload.data };
 
     case FETCH_POST:
-      return { ...state, post: action.payload.data };
+      return { ...state, posts: action.payload.data };
 
     case CREATE:
       return {
         ...state,
-        posts: [...state.posts.posts, action.payload.data],
+        posts: [...state.posts, action.payload],
       };
 
     case UPDATE:

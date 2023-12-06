@@ -8,10 +8,10 @@ import {
   END_LOADING_COMMENT,
   REPLY_COMMENT,
 } from "../constants/actionTypes";
-import { comments } from "../assets/dummyData"; //Dummy data
+// import { comments } from "../assets/dummyData"; //Dummy data
 
 //function below is a reducer - a function that is able to process our message, our Action. A reducer takes the existing state and applies the message on it. The end result is a new state.
-export default (state = { isLoading: false, comments: comments }, action) => {
+export default (state = { isLoading: false, comments: [] }, action) => {
   switch (action.type) {
     case START_LOADING_COMMENT:
       return { ...state, isLoading: true };
@@ -25,7 +25,7 @@ export default (state = { isLoading: false, comments: comments }, action) => {
       };
 
     case COMMENT:
-      return { ...state, comments: [...state.comments, action.payload] };
+      return { ...state, comments: [...state, action.payload] };
 
     case UPDATE_COMMENT:
     case LIKE_COMMENT:
