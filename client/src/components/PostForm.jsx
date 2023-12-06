@@ -25,7 +25,7 @@ const PostForm = () => {
     const uri = await handleFileUpload(postData.selectedFile);
 
     const newData = uri ? { ...postData, selectedFile: uri } : postData;
-    console.log(newData);
+
     dispatch(createPost({ ...newData }));
     clear();
   };

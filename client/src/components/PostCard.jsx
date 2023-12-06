@@ -36,14 +36,15 @@ const PostCard = ({ post, user, handleDelete, likePost, postComments }) => {
     //TODO something
   };
 
+  console.log(post?.userId?.profileUrl);
   return (
     <div className="mb-2 bg-primary p-4 rounded-xl">
       {/* Display post owner detail */}
       <div className="flex gap-3 items-center mb-2">
         <Link to={"/profile/" + post?.userId?._id}>
           <img
-            src={post?.userId?.profileUrl ?? NoProfile}
-            alt={post?.userId?.firstName}
+            src={currentUser?.profileUrl ?? NoProfile}
+            alt={currentUser?.firstName}
             className="w-14 h-14 object-cover rounded-full"
           />
         </Link>
