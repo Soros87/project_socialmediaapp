@@ -20,9 +20,7 @@ export const createPost = async (req, res, next) => {
       selectedFile,
     });
 
-    res.status(201).json({
-      posts: newPost,
-    });
+    res.status(201).json({ posts: newPost });
   } catch (error) {
     console.log(error);
     res.status(404).json({ message: error.message });
@@ -69,9 +67,7 @@ export const getPosts = async (req, res, next) => {
       postsRes = posts;
     }
 
-    res.status(200).json({
-      posts: postsRes,
-    });
+    res.status(200).json(postsRes);
   } catch (error) {
     console.log(error);
     res.status(404).json({ message: error.message });
@@ -124,7 +120,7 @@ export const getPostsBySearch = async (req, res, next) => {
     }
     // Sending the response back to the client
     res.status(200).json({
-      posts: postsRes,
+      data: postsRes,
     });
   } catch (error) {
     console.log(error);

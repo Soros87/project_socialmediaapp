@@ -34,7 +34,10 @@ export default (state = { isLoading: false, posts: [] }, action) => {
       return { ...state, post: action.payload.data };
 
     case CREATE:
-      return { ...state, posts: [...state.posts, action.payload] };
+      return {
+        ...state,
+        posts: [...state.posts.posts, action.payload.data],
+      };
 
     case UPDATE:
     case LIKE:

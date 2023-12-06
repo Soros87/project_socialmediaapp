@@ -19,7 +19,7 @@ const Posts = () => {
 
   const fetchPosts = async () => {
     //TODO
-    // dispatch(getPosts());
+    dispatch(getPosts());
     //setPosts(res?.data) // res.data is an array of posts
   };
 
@@ -36,8 +36,8 @@ const Posts = () => {
     <>
       {isLoading ? (
         <Loading />
-      ) : posts?.posts?.length > 0 ? (
-        posts?.posts?.map((post) => (
+      ) : posts?.length > 0 ? (
+        posts?.map((post) => (
           <PostCard
             post={post}
             key={post?._id}
