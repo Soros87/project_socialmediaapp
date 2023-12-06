@@ -38,7 +38,6 @@ const Login = () => {
   //submit the login/signup form to the backend server
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
 
     try {
       if (isSignup) {

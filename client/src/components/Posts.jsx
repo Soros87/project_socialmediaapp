@@ -1,15 +1,36 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Loading, PostCard } from "../components";
+import { getPosts } from "../actions/posts";
 
 const Posts = () => {
   const { posts, isLoading } = useSelector((state) => state.post);
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
   const { comments } = useSelector((state) => state.comment);
 
-  const handleLikePost = async (uri) => {};
+  const handleLikePost = async (uri) => {
+    //TODO
+  };
 
-  const handleDelete = async (id) => {};
+  const handleDelete = async (id) => {
+    //TODO
+  };
+
+  const fetchPosts = async () => {
+    //TODO
+    // dispatch(getPosts());
+    //setPosts(res?.data) // res.data is an array of posts
+  };
+
+  const getComments = async (id) => {
+    //TO DO
+  };
+
+  useEffect(() => {
+    fetchPosts();
+    getComments();
+  }, [dispatch]);
 
   return (
     <>

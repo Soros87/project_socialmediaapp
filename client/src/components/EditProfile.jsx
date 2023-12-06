@@ -11,6 +11,7 @@ const EditProfile = ({ user }) => {
   const dispatch = useDispatch();
   const [picture, setPicture] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
   const handleSelect = (e) => {
     setPicture(e.target.files[0]);
   };
@@ -71,12 +72,7 @@ const EditProfile = ({ user }) => {
                     <span className="text-lg font-medium text-ascent-1 ml-4">
                       {user?.firstName} {user?.lastName}
                     </span>
-                    <div className="flex flex-row">
-                      <BiImages className="text-ascent-2 ml-4" />
-                      <span className="text-ascent-1  text-sm ml-2">
-                        Choose Profile Picture
-                      </span>
-                    </div>
+                    <div className="flex flex-row"></div>
                   </div>
                 </div>
                 <label
@@ -90,7 +86,11 @@ const EditProfile = ({ user }) => {
                     onChange={(e) => handleSelect(e)}
                     accept=".jpg, .png, .jpeg"
                   />
+                  <BiImages className="text-ascent-2 ml-4 cursor-pointer" />
                 </label>
+                <span className="text-ascent-1  text-sm ml-2">
+                  Choose Profile Picture
+                </span>
               </div>
               <TextInput
                 name="firstName"

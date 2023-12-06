@@ -1,6 +1,4 @@
 import {
-  CREATE,
-  UPDATE,
   FETCH_ALL,
   FETCH_POST,
   LIKE,
@@ -16,10 +14,11 @@ export const requestPasswordReset = (email) => async () => {
     await api.requestPasswordReset(email);
   } catch (error) {
     console.log(error);
+    window.alert("Something went wrong. Please try again.");
   }
 };
 
-export const getUserInfo = () => async (id) => {
+export const getUser = () => async (id) => {
   try {
     const { data } = await api.getUser(id);
 

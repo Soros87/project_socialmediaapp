@@ -21,6 +21,7 @@ export default (state = { isLoading: false, posts: posts }, action) => {
       return { ...state, isLoading: false };
     case FETCH_ALL:
       //payload comes from posts.js in ../src/action
+
       return {
         ...state,
         posts: action.payload.data,

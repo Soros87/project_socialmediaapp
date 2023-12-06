@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { CustomButton, Loading, TextInput } from "../components";
 import { MdArrowBackIosNew } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { requestPasswordReset } from "../actions/users";
 
 const initialState = {
   email: "",
@@ -11,6 +13,7 @@ const initialState = {
 const ResetPassword = () => {
   const { theme } = useSelector((state) => state.theme);
   const navigateTo = useNavigate();
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState(initialState);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -23,13 +26,10 @@ const ResetPassword = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
     console.log(formData);
-
-    if (isSignup) {
-      //TODO signup
-    } else {
-      //TODO login
-    }
+    dispatch(requestPasswordReset(formData));
+    setIsSubmitting(false);
   };
 
   return (

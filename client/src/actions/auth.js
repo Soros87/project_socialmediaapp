@@ -12,6 +12,12 @@ export const signin = (formData, navigateTo) => async (dispatch) => {
     navigateTo("/");
   } catch (error) {
     console.log(error);
+    // Display an alert if password or email doesn't match
+    if (error.response && error.response.status === 404) {
+      window.alert(
+        "Email (not verified) or password is incorrect. Please try again."
+      ); // Alert message
+    }
   }
 };
 
@@ -26,5 +32,8 @@ export const signup = (formData, navigateTo) => async (dispatch) => {
     navigateTo("/login");
   } catch (error) {
     console.log(error);
+    if (error.response && error.response.status === 400) {
+      window.alert("Email already registered. Please login"); // Alert message
+    }
   }
 };

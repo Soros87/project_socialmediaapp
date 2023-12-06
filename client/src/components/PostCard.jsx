@@ -12,7 +12,7 @@ const PostCard = ({ post, user, deletePost, likePost, postComments }) => {
   const [likes, setLikes] = useState(post?.likes);
   const [showReply, setShowReply] = useState(0);
 
-  const foundComments = postComments.find((commentArray) =>
+  const foundComments = postComments?.find((commentArray) =>
     commentArray.some((comment) => comment._id === post._id)
   );
 
@@ -65,7 +65,7 @@ const PostCard = ({ post, user, deletePost, likePost, postComments }) => {
         <p className="text-ascent-2">
           {showAll === post?._id
             ? post?.description
-            : post?.description.length > 300
+            : post?.description?.length > 300
             ? `${post?.description.slice(0, 300)}...  `
             : post?.description}
           {post?.description?.length > 300 &&
@@ -86,20 +86,20 @@ const PostCard = ({ post, user, deletePost, likePost, postComments }) => {
             ))}
         </p>
         {/* Display video/img/gifs */}
-        {post?.file && (
+        {post?.selectedFile && (
           <>
-            {post?.file.endsWith(".mp4") ||
-            post?.file.endsWith(".webm") ||
-            post?.file.endsWith(".wav") ||
-            post?.file.endsWith(".gif") ? (
+            {post?.selectedFile.endsWith(".mp4") ||
+            post?.selectedFile.endsWith(".webm") ||
+            post?.selectedFile.endsWith(".wav") ||
+            post?.selectedFile.endsWith(".gif") ? (
               <video
-                src={post?.file}
+                src={post?.selectedFile}
                 controls
                 className="w-full mt-2 rounded-lg"
               />
             ) : (
               <img
-                src={post?.file}
+                src={post?.selectedFile}
                 alt="post file"
                 className="w-full mt-2 rounded-lg"
               />

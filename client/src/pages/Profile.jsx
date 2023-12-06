@@ -30,13 +30,14 @@ const Profile = () => {
   const getUser = async () => {
     //TODO set User info
     // setUserInfo(id);
+    setLoading(false);
   };
 
   useEffect(() => {
     setLoading(true);
     getUser();
     //TODO
-  }, [id]);
+  }, []);
   return (
     <>
       <div className="w-full px-0 lg:px-10 pb-20 2xl:px-40 bg-bgColor lg:rounded-lg h-screen overflow-hidden">

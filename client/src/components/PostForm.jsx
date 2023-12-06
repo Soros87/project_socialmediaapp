@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import { BiImages, BiSolidVideo } from "react-icons/bi";
 import { CustomButton, TextInput } from "../components";
 import { NoProfile } from "../assets";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Loading } from "../components";
 import { BsFiletypeGif } from "react-icons/bs";
 import { Tooltip, Typography } from "@material-tailwind/react";
+import { createPost } from "../actions/posts";
+import { handleFileUpload } from "../utils";
 
 const PostForm = () => {
   const { isLoading } = useSelector((state) => state.post);
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
   const [postData, setPostData] = useState({
     selectedFile: "",
@@ -17,7 +20,18 @@ const PostForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault(); //event - not to get the refresh in the browser
-    //TODO
+
+    //upload file to cloudinary server and convert image to url string
+    const uri = await handleFileUpload(postData.selectedFile);
+
+    const newData = uri ? { ...postData, selectedFile: uri } : postData;
+
+    dispatch(createPost({ ...newData }));
+    clear();
+  };
+
+  const clear = () => {
+    setPostData({ description: "", selectedFile: "" });
   };
 
   return (
@@ -35,7 +49,9 @@ const PostForm = () => {
           type="text"
           name="description"
           required=""
-          onChange={(e) => setPostData(e.target.value)}
+          onChange={(e) =>
+            setPostData({ ...postData, description: e.target.value })
+          }
         />
       </div>
 
@@ -46,7 +62,9 @@ const PostForm = () => {
         >
           <input
             type="file"
-            onChange={(e) => setPostData(e.target.files[0])}
+            onChange={(e) =>
+              setPostData({ ...postData, selectedFile: e.target.files[0] })
+            }
             className="hidden"
             id="imgUpload"
             data-max-size="5120"
@@ -72,7 +90,9 @@ const PostForm = () => {
           <input
             type="file"
             data-max-size="5120"
-            onChange={(e) => setPostData(e.target.files[0])}
+            onChange={(e) =>
+              setPostData({ ...postData, selectedFile: e.target.files[0] })
+            }
             className="hidden"
             id="videoUpload"
             accept=".mp4, .wav"
@@ -98,7 +118,9 @@ const PostForm = () => {
           <input
             type="file"
             data-max-size="5120"
-            onChange={(e) => setPostData(e.target.files[0])}
+            onChange={(e) =>
+              setPostData({ ...postData, selectedFile: e.target.files[0] })
+            }
             className="hidden"
             id="vgifUpload"
             accept=".gif"

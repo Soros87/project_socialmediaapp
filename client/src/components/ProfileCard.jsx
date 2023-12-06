@@ -23,7 +23,9 @@ const ProfileCard = ({ user }) => {
     dispatch({ type: UPDATEPROFILE, payload: !edit });
   };
 
-  const sendFriendRequest = () => {};
+  const sendFriendRequest = () => {
+    //TODO
+  };
 
   return (
     <div className="w-full bg-primary flex flex-col items-center shadow-sm rounded-xl px-6 py-4">
@@ -57,7 +59,7 @@ const ProfileCard = ({ user }) => {
                 className="text-[#0f52b6]"
                 onClick={sendFriendRequest}
               />
-            </button> //Add friend
+            </button> //TODO Add friend only when user viewed is not the same as the logged in user
           )}
         </div>
       </div>

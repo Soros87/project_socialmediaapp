@@ -52,24 +52,26 @@ export const getPosts = () => async (dispatch) => {
     dispatch({ type: START_LOADING });
     const { data } = await api.fetchPosts();
 
+    console.log("data", data);
+
     dispatch({
       type: FETCH_ALL,
       payload: { data },
     });
+
     dispatch({ type: END_LOADING });
   } catch (error) {
     console.log(error);
   }
 };
 
-export const createPost = (post, navigateTo) => async (dispatch) => {
+export const createPost = (post) => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
     const { data } = await api.createPost(post);
 
-    navigateTo("/");
-
     dispatch({ type: CREATE, payload: data });
+    dispatch({ type: END_LOADING });
   } catch (error) {
     console.log(error);
   }

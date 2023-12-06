@@ -67,13 +67,13 @@ export const sendVerificationEmail = async (user, res) => {
       expiresAt: Date.now() + 3600000,
     });
     if (newVerifiedEmail) {
-      transporter
-        .sendMail(mailOptions)
-
-        .catch((err) => {
-          console.log(err);
-          res.status(404).json({ message: "Something went wrong" });
+      transporter.sendMail(mailOptions).then(() => {
+        res.status(201).send({
+          success: "PENDING",
+          message:
+            "Verification email has been sent to your account. Check your email for further instructions.",
         });
+      });
     }
   } catch (error) {
     console.log(error);
@@ -113,15 +113,15 @@ export const resetPasswordLink = async (user, res) => {
     });
 
     if (resetEmail) {
-      transporter
-        .sendMail(mailOptions)
-
-        .catch((err) => {
-          console.log(err);
-          res.status(404).json({ message: "Something went wrong" });
+      transporter.sendMail(mailOptions).then(() => {
+        res.status(201).send({
+          success: "PENDING",
+          message: "Reset Password Link has been sent to your account.",
         });
+      });
     }
   } catch (error) {
     console.log(error);
+    res.status(404).json({ message: "Something went wrong" });
   }
 };

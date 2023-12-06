@@ -17,7 +17,7 @@ import {
 const router = express.Router();
 
 //create post
-router.post("/create-post", userAuth, createPost);
+router.post("/create-posts", userAuth, createPost);
 
 // get posts
 router.get("/", userAuth, getPosts);

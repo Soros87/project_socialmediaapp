@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { friends } from "../assets/dummyData";
 import { Link } from "react-router-dom";
 import { NoProfile } from "../assets";
@@ -8,7 +8,19 @@ import { friendRequest as dummyFriends } from "../assets/dummyData";
 const FriendRequestCard = () => {
   const [friendRequest, setFriendRequest] = useState(dummyFriends);
 
-  const acceptFriendRequest = async (id, status) => {};
+  const acceptFriendRequest = async (id, status) => {
+    //TODO
+  };
+
+  const fetchFriendRequests = async () => {
+    //TODO
+    //setFriendRequest(res?.data) // res.data is an array of friend requests
+  };
+
+  useEffect(() => {
+    fetchFriendRequests();
+  }, []);
+
   return (
     <div className="w-full bg-primary shadow-sm rounded-lg px-6 py-5">
       <div className="flex items-center justify-between text-xl text-ascent-1 pb-2 border-b border-[#66666645]">

@@ -7,7 +7,7 @@ const LikesPost = ({ post, user }) => {
     fontSize: "20px",
     color: "#065AD8", // Apply blue color directly as a style
   };
-  if (likes.length > 0) {
+  if (likes?.length > 0) {
     return likes.find((like) => like === user?._id) ? (
       <>
         <BiSolidLike style={likeIconStyle} />
