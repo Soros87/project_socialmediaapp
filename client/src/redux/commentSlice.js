@@ -1,23 +1,23 @@
 import {
-  FETCH_ALL,
+  FETCH_ALL_COMMENT,
   COMMENT,
-  UPDATE,
-  DELETE,
-  LIKE,
-  START_LOADING,
-  END_LOADING,
-  REPLY,
+  UPDATE_COMMENT,
+  DELETE_COMMENT,
+  LIKE_COMMENT,
+  START_LOADING_COMMENT,
+  END_LOADING_COMMENT,
+  REPLY_COMMENT,
 } from "../constants/actionTypes";
 import { comments } from "../assets/dummyData"; //Dummy data
 
 //function below is a reducer - a function that is able to process our message, our Action. A reducer takes the existing state and applies the message on it. The end result is a new state.
 export default (state = { isLoading: false, comments: comments }, action) => {
   switch (action.type) {
-    case START_LOADING:
+    case START_LOADING_COMMENT:
       return { ...state, isLoading: true };
-    case END_LOADING:
+    case END_LOADING_COMMENT:
       return { ...state, isLoading: false };
-    case FETCH_ALL:
+    case FETCH_ALL_COMMENT:
       //payload comes from posts.js in ../src/action
       return {
         ...state,
@@ -27,8 +27,8 @@ export default (state = { isLoading: false, comments: comments }, action) => {
     case COMMENT:
       return { ...state, comments: [...state.comments, action.payload] };
 
-    case UPDATE:
-    case LIKE:
+    case UPDATE_COMMENT:
+    case LIKE_COMMENT:
       return {
         ...state,
         comments: state.comments.map((post) =>
@@ -36,7 +36,7 @@ export default (state = { isLoading: false, comments: comments }, action) => {
         ),
       };
 
-    case REPLY:
+    case REPLY_COMMENT:
       return {
         ...state,
         comments: state.comments.map((post) => {
@@ -46,7 +46,7 @@ export default (state = { isLoading: false, comments: comments }, action) => {
           return post;
         }),
       };
-    case DELETE:
+    case DELETE_COMMENT:
       return {
         ...state,
         comments: state.comments.filter((post) => post._id !== action.payload),

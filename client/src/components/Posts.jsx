@@ -36,8 +36,8 @@ const Posts = () => {
     <>
       {isLoading ? (
         <Loading />
-      ) : posts?.length > 0 ? (
-        posts?.map((post) => (
+      ) : posts?.posts?.length > 0 ? (
+        posts?.posts?.map((post) => (
           <PostCard
             post={post}
             key={post?._id}

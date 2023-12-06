@@ -7,11 +7,16 @@ import {
   useLocation,
 } from "react-router-dom";
 import { Home, Login, Profile, ResetPassword } from "./pages";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { getUser } from "./actions/users";
+import { useState } from "react";
 
 function Layout() {
-  const { user } = useSelector((state) => state.user);
-  const location = useLocation();
+  const dispatch = useDispatch();
+
+  //permanently store the user in local storage
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+
   console.log("user", user);
 
   return user?.token ? (

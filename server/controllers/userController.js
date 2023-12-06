@@ -208,7 +208,7 @@ export const getUser = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      user: user,
+      user,
     });
   } catch (error) {
     console.log(error);
@@ -294,6 +294,7 @@ export const friendRequest = async (req, res, next) => {
     res.status(201).json({
       success: true,
       message: "Friend Request sent successfully",
+      newReq,
     });
   } catch (error) {
     console.log(error);
@@ -318,7 +319,7 @@ export const getFriendRequest = async (req, res) => {
     .sort({ _id: -1 }); //descending order - latest request first
 
   //send back the request to the client side
-  res.status(200).json({ success: true, data: request });
+  res.status(200).json({ success: true, request });
   try {
   } catch (error) {
     console.log(error);
@@ -429,7 +430,7 @@ export const suggestedFriends = async (req, res) => {
     // Send a successful response with suggestedFriends data
     res.status(200).json({
       success: true,
-      data: suggestedFriends,
+      suggestedFriends,
     });
   } catch (error) {
     console.log(error);

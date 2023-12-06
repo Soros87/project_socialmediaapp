@@ -1,6 +1,4 @@
 import Users from "../models/userModel.js";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
 import { compareString, createJWT, hashString } from "../utils/index.js";
 import { sendVerificationEmail } from "../utils/sendEmail.js";
 
@@ -54,7 +52,7 @@ export const signin = async (req, res, next) => {
     return;
   }
   try {
-    const existingUser = await await Users.findOne({ email })
+    const existingUser = await Users.findOne({ email })
       .select("+password")
       .populate({
         path: "friends",

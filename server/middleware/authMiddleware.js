@@ -8,11 +8,9 @@ const userAuth = async (req, res, next) => {
   }
 
   const token = authHeader?.split(" ")[1];
-  console.log("backend token", token); //FIXME
 
   try {
     const userToken = JWT.verify(token, process.env.JWT_SECRET_KEY);
-    console.log("backend userToken", userToken);
 
     //req.body.user can be replaced by req.userId
     req.body.user = {

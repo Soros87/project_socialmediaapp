@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 export const createPost = async (req, res, next) => {
   try {
     const { userId } = req.body.user;
+
     const { description, selectedFile } = req.body;
 
     if (!description) {
@@ -20,9 +21,7 @@ export const createPost = async (req, res, next) => {
     });
 
     res.status(201).json({
-      sucess: true,
-      message: "Post created successfully",
-      data: newPost,
+      posts: newPost,
     });
   } catch (error) {
     console.log(error);
@@ -71,9 +70,7 @@ export const getPosts = async (req, res, next) => {
     }
 
     res.status(200).json({
-      sucess: true,
-      message: "successfully retrieved posts",
-      data: postsRes,
+      posts: postsRes,
     });
   } catch (error) {
     console.log(error);
@@ -127,9 +124,7 @@ export const getPostsBySearch = async (req, res, next) => {
     }
     // Sending the response back to the client
     res.status(200).json({
-      success: true,
-      message: "successfully retrieved posts",
-      data: postsRes,
+      posts: postsRes,
     });
   } catch (error) {
     console.log(error);
@@ -164,9 +159,7 @@ export const getPost = async (req, res, next) => {
         },
       });
 
-    res
-      .status(200)
-      .json({ success: true, message: "Successfully retrieved", data: post });
+    res.status(200).json({ post });
   } catch (error) {
     console.log(error);
     res.status(404).json({ message: error.message });
@@ -185,9 +178,7 @@ export const getUserPost = async (req, res) => {
       .sort({ _id: -1 });
 
     res.status(200).json({
-      sucess: true,
-      message: "Successfully retrieved",
-      data: post,
+      post,
     });
   } catch (error) {
     console.log(error);
@@ -211,9 +202,7 @@ export const getComments = async (req, res) => {
       .sort({ _id: -1 });
 
     res.status(200).json({
-      success: true,
-      message: "Successfully retrieved comments",
-      data: postComments,
+      comments: postComments,
     });
   } catch (error) {
     console.log(error);
@@ -254,9 +243,7 @@ export const likePost = async (req, res) => {
 
     // Sending the response back to the client
     res.status(200).json({
-      success: true,
-      message: "successfully updated",
-      data: updatedPost,
+      post: updatedPost,
     });
   } catch (error) {
     console.log(error);
@@ -287,9 +274,7 @@ export const likePostComment = async (req, res) => {
       });
       //send back the response
       res.status(201).json({
-        success: true,
-        message: "successfully updated",
-        data: updatedPost,
+        post: updatedPost,
       });
     } else {
       //user wants to like a reply
@@ -358,9 +343,7 @@ export const commentPost = async (req, res, next) => {
     await Posts.findByIdAndUpdate(id, post, { new: true });
 
     res.status(201).json({
-      success: true,
-      message: "successfully post comment",
-      data: newComment,
+      comment: newComment,
     });
   } catch (error) {
     console.log(error);
@@ -390,9 +373,7 @@ export const replyPostComment = async (req, res, next) => {
     commentInfo.save();
 
     res.status(200).json({
-      success: true,
-      message: "successfully post reply",
-      data: commentInfo,
+      comment: commentInfo,
     });
   } catch (error) {
     console.log(error);
