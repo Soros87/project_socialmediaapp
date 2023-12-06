@@ -13,11 +13,10 @@ import { useState } from "react";
 
 function Layout() {
   const dispatch = useDispatch();
+  const location = useLocation();
 
   //permanently store the user in local storage
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
-
-  console.log("user", user);
 
   return user?.token ? (
     <Outlet />
